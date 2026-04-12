@@ -25,7 +25,9 @@ export default function Cta() {
             Read on Medium ↗
           </a>
           <a
-            href="#"
+            href="https://github.com/ibrahimferel/final-fried-kcv"
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center gap-2 text-white/50 font-sans text-sm border border-bdh px-6 py-2.5 rounded-md hover:border-[rgba(240,224,64,0.28)] hover:text-white/80 transition-all"
           >
             GitHub Repository ↗
