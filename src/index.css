@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { background: #0a0a0a; color: #e5e5e5; font-family: 'Geist', sans-serif; overflow-x: hidden; }
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-thumb { background: #222; }
+  a:focus-visible { outline: 2px solid #f0e040; outline-offset: 2px; border-radius: 4px; }
+}
+
+@layer utilities {
+  .font-serif-i { font-family: 'Instrument Serif', serif; font-style: italic; }
+  .font-mono-c  { font-family: 'Geist Mono', monospace; }
+
+  .wb {
+    width: 2px;
+    border-radius: 1px;
+    background: #f0e040;
+    height: 4px;
+    animation: wva 1.2s ease-in-out infinite alternate;
+  }
+  @keyframes wva { to { height: var(--h, 20px); } }
+
+  .rv {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.58s ease, transform 0.58s ease;
+  }
+  .rv.vs { opacity: 1; transform: none; }
+
+  @keyframes fu {
+    from { opacity: 0; transform: translateY(18px); filter: blur(5px); }
+    to   { opacity: 1; transform: none; filter: blur(0); }
+  }
+  .anim-fu { opacity: 0; animation: fu 0.7s forwards; }
+
+  .na.on { color: #f0e040; }
+}
