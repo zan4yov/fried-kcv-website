@@ -18,29 +18,29 @@ export default function Hero() {
       </div>
 
       <h1
-        className="font-serif-i text-[clamp(3rem,7.5vw,5.8rem)] leading-[0.9] tracking-[-2px] text-white mb-7 anim-fu"
+        className="font-serif-i text-[clamp(2.6rem,6.5vw,5rem)] leading-[0.92] tracking-[-2px] text-white mb-7 anim-fu"
         style={{ animationDelay: '200ms' }}
       >
-        Deepfake Speech<br />
+        Fake67: Explainable<br />
         <span className="text-y relative inline-block">
-          Detection
+          Deepfake Audio
           <span className="absolute bottom-[3px] left-0 right-0 h-[2px] bg-y opacity-30 rounded-sm" />
         </span>
-        {' '}&amp;<br />Biometric Auth
+        <br />Detection
       </h1>
 
       <p
         className="text-[17px] font-light text-white/45 leading-[1.8] max-w-[540px] mb-10 anim-fu"
         style={{ animationDelay: '300ms' }}
       >
-        A dual-layer AI security system that identifies synthetic voices using spectral deep learning
-        and verifies genuine user identity through multi-modal biometrics — all in real time.
+        Explainable deepfake audio detection via Mel spectrograms using EfficientNet-B4
+        and Grad-CAM — with a 3-layer NLP fallback that always explains why.
       </p>
 
       <div className="flex gap-3 flex-wrap anim-fu" style={{ animationDelay: '400ms' }}>
         <a
           href="#overview"
-          className="inline-flex items-center gap-2 bg-y text-black font-sans text-sm font-semibold px-6 py-2.5 rounded-md hover:opacity-90 transition-all hover:shadow-[0_0_20px_rgba(240,224,64,0.2)]"
+          className="inline-flex items-center gap-2 text-white/50 font-sans text-sm border border-bdh px-6 py-2.5 rounded-md hover:border-[rgba(240,224,64,0.28)] hover:text-white/80 transition-all active:bg-y active:text-black active:border-y active:font-semibold"
         >
           Read the Docs ↓
         </a>
@@ -48,7 +48,7 @@ export default function Hero() {
           href="https://medium.com/@ferelibrahim01/04a015c8f885"
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-2 text-white/50 font-sans text-sm border border-bdh px-6 py-2.5 rounded-md hover:border-[rgba(240,224,64,0.28)] hover:text-white/80 transition-all"
+          className="inline-flex items-center gap-2 text-white/50 font-sans text-sm border border-bdh px-6 py-2.5 rounded-md hover:border-[rgba(240,224,64,0.28)] hover:text-white/80 transition-all active:bg-y active:text-black active:border-y active:font-semibold"
         >
           Medium Article ↗
         </a>

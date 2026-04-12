@@ -20,7 +20,7 @@ export default function Cta() {
             href="https://medium.com/@ferelibrahim01/04a015c8f885"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 bg-y text-black font-sans text-sm font-semibold px-6 py-2.5 rounded-md hover:opacity-90 transition-all hover:shadow-[0_0_20px_rgba(240,224,64,0.2)]"
+            className="inline-flex items-center gap-2 text-white/50 font-sans text-sm border border-bdh px-6 py-2.5 rounded-md hover:border-[rgba(240,224,64,0.28)] hover:text-white/80 transition-all active:bg-y active:text-black active:border-y active:font-semibold"
           >
             Read on Medium ↗
           </a>
@@ -28,7 +28,7 @@ export default function Cta() {
             href="https://github.com/ibrahimferel/final-fried-kcv"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 text-white/50 font-sans text-sm border border-bdh px-6 py-2.5 rounded-md hover:border-[rgba(240,224,64,0.28)] hover:text-white/80 transition-all"
+            className="inline-flex items-center gap-2 text-white/50 font-sans text-sm border border-bdh px-6 py-2.5 rounded-md hover:border-[rgba(240,224,64,0.28)] hover:text-white/80 transition-all active:bg-y active:text-black active:border-y active:font-semibold"
           >
             GitHub Repository ↗
           </a>
@@ -36,7 +36,7 @@ export default function Cta() {
             href="https://huggingface.co/spaces/narcissablack/fake67-app"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 text-white/50 font-sans text-sm border border-bdh px-6 py-2.5 rounded-md hover:border-[rgba(240,224,64,0.28)] hover:text-white/80 transition-all"
+            className="inline-flex items-center gap-2 text-white/50 font-sans text-sm border border-bdh px-6 py-2.5 rounded-md hover:border-[rgba(240,224,64,0.28)] hover:text-white/80 transition-all active:bg-y active:text-black active:border-y active:font-semibold"
           >
             Live Demo ↗
           </a>
