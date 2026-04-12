@@ -38,6 +38,14 @@ export default function Footer() {
           GitHub ↗
         </a>
         <a
+          href="https://huggingface.co/spaces/narcissablack/fake67-app"
+          target="_blank"
+          rel="noreferrer"
+          className="text-[13px] text-mt no-underline px-2.5 py-1 rounded-[5px] transition-all duration-200 hover:text-y hover:bg-[rgba(240,224,64,0.07)]"
+        >
+          Live Demo ↗
+        </a>
+        <a
           href="https://medium.com/@ferelibrahim01/04a015c8f885"
           target="_blank"
           rel="noreferrer"

@@ -32,6 +32,14 @@ export default function Cta() {
           >
             GitHub Repository ↗
           </a>
+          <a
+            href="https://huggingface.co/spaces/narcissablack/fake67-app"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-white/50 font-sans text-sm border border-bdh px-6 py-2.5 rounded-md hover:border-[rgba(240,224,64,0.28)] hover:text-white/80 transition-all"
+          >
+            Live Demo ↗
+          </a>
         </div>
       </div>
     </section>
