@@ -97,6 +97,12 @@ export default function Architecture() {
         </div>
 
         {/* Pipeline */}
+        <div className="rv flex items-center justify-center mb-3">
+          <span className="font-mono-c text-[10px] tracking-[0.18em] uppercase text-y bg-[rgba(185,154,46,0.07)] border border-[rgba(185,154,46,0.18)] px-3 py-1 rounded">
+            {selectedLayer?.tag ?? 'Stage 2 · CV inference'}
+          </span>
+        </div>
+
         <div className="flex items-center justify-center flex-wrap gap-1 my-[34px] rv">
           {pipelineItems.map((item, i) =>
             item.type === 'arrow' ? (
