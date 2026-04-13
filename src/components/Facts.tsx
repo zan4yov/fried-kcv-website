@@ -56,9 +56,6 @@ export default function Facts() {
         <div className="relative rounded-2xl border border-white/[0.08] bg-[rgba(10,10,10,0.65)] backdrop-blur-xl shadow-[0_32px_64px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_55%_at_50%_-10%,rgba(185,154,46,0.1),transparent_55%)] pointer-events-none" />
           <div className="relative">
-            <span className="absolute top-3.5 left-3.5 z-10 font-mono-c text-[9px] tracking-[0.18em] uppercase px-2.5 py-1 rounded-md text-y bg-black/40 border border-[rgba(185,154,46,0.25)] backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
-              Fig. 4
-            </span>
             <iframe
               title="Figure 4, model performance: metrics, ROC curve, and confusion matrix"
               src="/figures/figure4_model_performance.html"

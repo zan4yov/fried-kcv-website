@@ -182,9 +182,6 @@ export default function Architecture() {
         {/* Figure 2 */}
         <div className="border border-bd rounded-xl overflow-hidden bg-surf mb-[42px] rv">
           <div className="relative p-3 md:p-4 bg-[#0d0d0d]">
-            <span className="absolute top-4 left-4 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.1)] border border-[rgba(185,154,46,0.22)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
-              Fig. 2
-            </span>
             <img
               src="/figures/figure2_system_pipeline.jpeg"
               alt="Figure 2, end-to-end system pipeline: audio DSP to CV inference, Grad-CAM, and NLP explanation"

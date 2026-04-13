@@ -86,9 +86,6 @@ export default function Overview() {
               title="Open full image"
             >
               <div className="relative p-3 md:p-4 bg-[#0d0d0d]">
-                <span className="absolute top-3 left-3 z-10 font-mono-c text-[9px] tracking-widest uppercase bg-black/55 border border-white/10 text-white/80 px-2 py-0.5 rounded">
-                  {img.label}
-                </span>
                 <img
                   src={img.src}
                   alt={img.alt}
@@ -107,9 +104,6 @@ export default function Overview() {
       {/* Figure 1, pipeline overview (replaces prior SVG) */}
       <div className="border border-bd rounded-xl overflow-hidden bg-surf rv">
         <div className="relative p-3 md:p-5 bg-[#f5f5f5]">
-          <span className="absolute top-4 left-4 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.12)] border border-[rgba(185,154,46,0.35)] text-[#5c4d12] px-2.5 py-0.5 rounded tracking-widest uppercase">
-            Fig. 1
-          </span>
           <img
             src="/figures/figure1_pipeline_overview.jpeg"
             alt="Figure 1, Fake67 pipeline flowchart: WAV/FLAC input, Stage 1 Audio DSP, parallel Stage 2 CV inference and Stage 3 Grad-CAM XAI, Stage 4 NLP explanation with Qwen and fallbacks, Gradio output on Hugging Face Spaces"
