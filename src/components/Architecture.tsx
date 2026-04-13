@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { IconMic } from './icons/IconMic'
 import { IconWaveSignal } from './icons/IconWaveSignal'
 import { IconBrain } from './icons/IconBrain'
@@ -8,6 +8,13 @@ import { IconRobot } from './icons/IconRobot'
 type PipelineItem =
   | { type: 'node'; icon: ReactNode; label: string; sub: string; active: boolean; subYellow?: boolean }
   | { type: 'arrow' }
+
+const PIPELINE_TO_LAYER_TAG: Record<string, string> = {
+  'Stage 1 · Audio DSP': 'Stage 1 · Audio DSP',
+  'Stage 2 · CV inference': 'Stage 2 · CV inference',
+  'Stage 3 · Grad-CAM': 'Stage 3 · Grad-CAM (XAI)',
+  'Stage 4 · NLP': 'Stage 4 · NLP explanation',
+}
 
 const pipelineItems: PipelineItem[] = [
   { type: 'node', icon: <IconMic />,        label: 'Audio input',        sub: 'WAV / FLAC',                    active: false },
@@ -39,6 +46,20 @@ const FIG3_MSG = 'fried-figure3-size'
 
 export default function Architecture() {
   const fig3FrameRef = useRef<HTMLIFrameElement>(null)
+  const stageDetailRef = useRef<HTMLDivElement>(null)
+  const [selectedLayerTag, setSelectedLayerTag] = useState<string | null>(null)
+
+  const selectedLayer = useMemo(() => {
+    if (!selectedLayerTag) return null
+    return layers.find((l) => l.tag === selectedLayerTag) ?? null
+  }, [selectedLayerTag])
+
+  const onSelectStage = (pipelineLabel: string) => {
+    const tag = PIPELINE_TO_LAYER_TAG[pipelineLabel]
+    if (!tag) return
+    setSelectedLayerTag(tag)
+    requestAnimationFrame(() => stageDetailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+  }
 
   useEffect(() => {
     const onMsg = (e: MessageEvent) => {
@@ -75,7 +96,25 @@ export default function Architecture() {
             ) : (
               <div
                 key={i}
-                className={`border rounded-[10px] px-2.5 py-3.5 text-center min-w-[118px] max-w-[140px] md:min-w-[128px] md:max-w-none bg-bg cursor-default transition-all hover:border-[rgba(185,154,46,0.22)] hover:bg-[rgba(185,154,46,0.08)] hover:-translate-y-[3px] ${
+                role={PIPELINE_TO_LAYER_TAG[item.label] ? 'button' : undefined}
+                tabIndex={PIPELINE_TO_LAYER_TAG[item.label] ? 0 : undefined}
+                aria-pressed={
+                  PIPELINE_TO_LAYER_TAG[item.label] ? selectedLayerTag === PIPELINE_TO_LAYER_TAG[item.label] : undefined
+                }
+                onClick={PIPELINE_TO_LAYER_TAG[item.label] ? () => onSelectStage(item.label) : undefined}
+                onKeyDown={
+                  PIPELINE_TO_LAYER_TAG[item.label]
+                    ? (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault()
+                          onSelectStage(item.label)
+                        }
+                      }
+                    : undefined
+                }
+                className={`border rounded-[10px] px-2.5 py-3.5 text-center min-w-[118px] max-w-[140px] md:min-w-[128px] md:max-w-none bg-bg ${
+                  PIPELINE_TO_LAYER_TAG[item.label] ? 'cursor-pointer select-none' : 'cursor-default'
+                } transition-all hover:border-[rgba(185,154,46,0.22)] hover:bg-[rgba(185,154,46,0.08)] hover:-translate-y-[3px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(185,154,46,0.35)] focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(10,10,10,0.0)] ${
                   item.active
                     ? 'border-[rgba(185,154,46,0.22)] bg-[rgba(185,154,46,0.07)]'
                     : 'border-bd'
@@ -111,17 +150,34 @@ export default function Architecture() {
 
         {/* Two-column: stages + tech stack */}
         <div className="grid md:grid-cols-2 gap-8 rv">
-          <div>
-            <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase mb-[14px] block">
-              Pipeline stages (detail)
-            </span>
-            {layers.map((l) => (
-              <div key={l.tag} className="border border-bd rounded-[10px] p-4 mb-2 transition-[border-color] duration-200 hover:border-bdh bg-[rgba(185,154,46,0.04)]">
-                <div className="font-mono-c text-[9px] text-y tracking-[0.08em] mb-[5px] uppercase">{l.tag}</div>
-                <div className="text-[14px] font-medium text-white/[0.78] mb-[5px]">{l.name}</div>
-                <div className="text-[13px] text-mt font-light leading-[1.65]">{l.desc}</div>
+          <div ref={stageDetailRef}>
+            {selectedLayer ? (
+              <div className="border border-bd rounded-[12px] p-4 transition-[border-color] duration-200 hover:border-bdh bg-[rgba(185,154,46,0.04)]">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <div className="font-mono-c text-[9px] text-y tracking-[0.08em] mb-[5px] uppercase">{selectedLayer.tag}</div>
+                    <div className="text-[14px] font-medium text-white/[0.78] mb-[5px]">{selectedLayer.name}</div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedLayerTag(null)}
+                    className="font-mono-c text-[10px] tracking-[0.16em] uppercase text-mt2 hover:text-y transition-colors border border-bd hover:border-[rgba(185,154,46,0.22)] rounded-md px-2 py-1 bg-bg"
+                  >
+                    Close
+                  </button>
+                </div>
+                <div className="text-[13px] text-mt font-light leading-[1.65]">{selectedLayer.desc}</div>
               </div>
-            ))}
+            ) : (
+              <div className="border border-bd rounded-[12px] p-4 bg-[rgba(185,154,46,0.03)]">
+                <div className="font-mono-c text-[10px] tracking-[0.16em] uppercase text-mt2">
+                  Tap a stage above to view details
+                </div>
+                <div className="text-[13px] text-mt font-light leading-[1.65] mt-2">
+                  Select Stage 1–4 in the pipeline to reveal the corresponding explanation here.
+                </div>
+              </div>
+            )}
           </div>
 
           <div>
