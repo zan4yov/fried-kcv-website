@@ -10,8 +10,8 @@ interface Fact { icon: ReactNode; title: string; text: string }
 const facts: Fact[] = [
   { icon: <IconRobot size={18} />,     title: 'The word "hello" is hardest',  text: 'Voice generators have trained on billions of greetings — making AI-synthesized hellos nearly indistinguishable from real ones. We had to train specifically on greeting-heavy data to close this gap.' },
   { icon: <IconMusicNote size={18} />, title: '1980s music tech wins',        text: 'MFCC features — developed for music recognition in the 1980s — outperformed several newer deep learned representations as the single most discriminative feature in our benchmark tests.' },
-  { icon: <IconDna size={18} />,       title: '128 dimensions per voice',     text: 'Our biometric model encodes each speaker as a 128-dimensional embedding vector where genuine speakers cluster together and synthetic voices diverge — more dimensions than many face recognition systems use.' },
-  { icon: <IconHistogram size={18} />, title: '11 architectures, one winner', text: 'We benchmarked 11 model architectures before settling on CNN+LSTM. Logistic regression on raw spectral features ranked 4th overall — a reminder that simple baselines deserve evaluation before building complexity.' },
+  { icon: <IconDna size={18} />,       title: '1792-d backbone embedding',    text: 'EfficientNet-B4 hands off a 1792-dimensional embedding before the two-logit head — wide enough to separate bonafide vs spoof spectrograms yet still portable for ONNX Runtime on CPU-only Spaces.' },
+  { icon: <IconHistogram size={18} />, title: 'Baselines still matter',       text: 'We sweated simpler models and ablations alongside EfficientNet-B4; the Medium write-up calls out why spectral CNNs beat ad-hoc MFCC-only shortcuts once data gets messy.' },
   { icon: <IconBolt size={18} />,      title: '40× smaller than GPT-2',       text: 'Our detection model is 40× smaller than GPT-2, yet solves a problem GPT-2 was never designed for. It fits comfortably in a Docker container on consumer hardware. Specialized beats general-purpose, every time.' },
   { icon: <IconFace size={18} />,      title: '80% of humans fail too',       text: 'Studies show humans perceive AI-generated voices as real ~80% of the time. Our system catches what human ears miss — which is simultaneously the point of this project and a slightly unsettling fact.' },
 ]
@@ -36,7 +36,7 @@ export default function Facts() {
         {facts.map((f) => (
           <div
             key={f.title}
-            className="border border-bd rounded-[10px] px-[17px] py-[19px] transition-all duration-200 hover:border-[rgba(240,224,64,0.18)] hover:bg-[rgba(240,224,64,0.07)] cursor-default"
+            className="border border-bd rounded-[10px] px-[17px] py-[19px] transition-all duration-200 hover:border-[rgba(185,154,46,0.18)] hover:bg-[rgba(185,154,46,0.07)] cursor-default"
           >
             <div className="text-[17px] mb-[9px]">{f.icon}</div>
             <div className="text-[14px] font-medium text-white mb-1.5">{f.title}</div>
@@ -48,7 +48,7 @@ export default function Facts() {
       {/* Figure 4 — interactive Chart.js embed */}
       <div className="border border-bd rounded-xl overflow-hidden bg-surf mt-8 rv">
         <div className="relative bg-[#0a0a0a]">
-          <span className="absolute top-3 left-3 z-10 font-mono-c text-[9px] bg-[rgba(240,224,64,0.07)] border border-[rgba(240,224,64,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
+          <span className="absolute top-3 left-3 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.07)] border border-[rgba(185,154,46,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
             Fig. 4
           </span>
           <iframe

@@ -10,9 +10,9 @@ export default {
         mono:  ['"Geist Mono"', 'monospace'],
       },
       colors: {
-        y:    '#f0e040',
+        y:    '#b99a2e',
         bg:   '#0a0a0a',
-        surf: '#111111',
+        surf: '#12100c',
         bd:   '#1e1e1e',
         bdh:  '#2a2a2a',
         tx:   '#e5e5e5',

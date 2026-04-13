@@ -11,10 +11,14 @@ export default function Footer() {
     <footer className="max-w-page mx-auto px-8 py-12 border-t border-bd flex justify-between items-start flex-wrap gap-4">
       <div>
         <div className="flex items-center gap-[9px] mb-[7px]">
-          <div className="w-7 h-7 bg-y rounded-md flex items-center justify-center font-mono-c text-[11px] font-medium text-black">
-            DS
-          </div>
-          <span className="text-[13px] font-medium text-white/45">DeepSpeech Auth</span>
+          <img
+            src="/favicon.svg"
+            alt="Fake67"
+            width={28}
+            height={28}
+            className="w-7 h-7 rounded-md object-contain shrink-0 ring-1 ring-[rgba(185,154,46,0.25)]"
+          />
+          <span className="text-[13px] font-medium text-white/45">Fake67</span>
         </div>
         <div className="text-xs text-mt2">© 2026 Ferel · Safa · Razan — Final Project KCVanguard 2026</div>
       </div>
@@ -24,7 +28,7 @@ export default function Footer() {
           <a
             key={l.label}
             href={l.href}
-            className="text-[13px] text-mt no-underline px-2.5 py-1 rounded-[5px] transition-all duration-200 hover:text-y hover:bg-[rgba(240,224,64,0.07)]"
+            className="text-[13px] text-mt no-underline px-2.5 py-1 rounded-[5px] transition-all duration-200 hover:text-y hover:bg-[rgba(185,154,46,0.07)]"
           >
             {l.label}
           </a>
@@ -33,7 +37,7 @@ export default function Footer() {
           href="https://github.com/ibrahimferel/final-fried-kcv"
           target="_blank"
           rel="noreferrer"
-          className="text-[13px] text-mt no-underline px-2.5 py-1 rounded-[5px] transition-all duration-200 hover:text-y hover:bg-[rgba(240,224,64,0.07)]"
+          className="text-[13px] text-mt no-underline px-2.5 py-1 rounded-[5px] transition-all duration-200 hover:text-y hover:bg-[rgba(185,154,46,0.07)]"
         >
           GitHub ↗
         </a>
@@ -41,7 +45,7 @@ export default function Footer() {
           href="https://huggingface.co/spaces/narcissablack/fake67-app"
           target="_blank"
           rel="noreferrer"
-          className="text-[13px] text-mt no-underline px-2.5 py-1 rounded-[5px] transition-all duration-200 hover:text-y hover:bg-[rgba(240,224,64,0.07)]"
+          className="text-[13px] text-mt no-underline px-2.5 py-1 rounded-[5px] transition-all duration-200 hover:text-y hover:bg-[rgba(185,154,46,0.07)]"
         >
           Live Demo ↗
         </a>
@@ -49,7 +53,7 @@ export default function Footer() {
           href="https://medium.com/@ferelibrahim01/04a015c8f885"
           target="_blank"
           rel="noreferrer"
-          className="text-[13px] text-y no-underline px-2.5 py-1 rounded-[5px] transition-all duration-200 hover:bg-[rgba(240,224,64,0.07)]"
+          className="text-[13px] text-y no-underline px-2.5 py-1 rounded-[5px] transition-all duration-200 hover:bg-[rgba(185,154,46,0.07)]"
         >
           Medium ↗
         </a>

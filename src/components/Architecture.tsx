@@ -1,42 +1,38 @@
 import type { ReactNode } from 'react'
 import { IconMic } from './icons/IconMic'
 import { IconWaveSignal } from './icons/IconWaveSignal'
-import { IconBars } from './icons/IconBars'
 import { IconBrain } from './icons/IconBrain'
-import { IconLock } from './icons/IconLock'
-import { IconCheck } from './icons/IconCheck'
 import { IconLineChart } from './icons/IconLineChart'
+import { IconRobot } from './icons/IconRobot'
 
 type PipelineItem =
   | { type: 'node'; icon: ReactNode; label: string; sub: string; active: boolean; subYellow?: boolean }
   | { type: 'arrow' }
 
 const pipelineItems: PipelineItem[] = [
-  { type: 'node', icon: <IconMic />,        label: 'Audio Input',       sub: 'Raw waveform',       active: false },
+  { type: 'node', icon: <IconMic />,        label: 'Audio input',        sub: 'WAV / FLAC',                    active: false },
   { type: 'arrow' },
-  { type: 'node', icon: <IconWaveSignal />, label: 'Preprocessing',     sub: 'Normalize · Denoise', active: false },
+  { type: 'node', icon: <IconWaveSignal />, label: 'Stage 1 · Audio DSP', sub: 'STFT · Mel · 224²',            active: false },
   { type: 'arrow' },
-  { type: 'node', icon: <IconBars />,       label: 'Feature Extract',   sub: 'MFCC · Mel-spec',    active: false },
+  { type: 'node', icon: <IconBrain />,      label: 'Stage 2 · CV inference', sub: 'EfficientNet-B4 · ONNX',   active: true, subYellow: true },
   { type: 'arrow' },
-  { type: 'node', icon: <IconBrain />,      label: 'Deepfake Detector', sub: 'CNN + LSTM',          active: true, subYellow: true },
+  { type: 'node', icon: <IconLineChart />,  label: 'Stage 3 · Grad-CAM',   sub: 'XAI · 4-band Mel',            active: false },
   { type: 'arrow' },
-  { type: 'node', icon: <IconLock />,       label: 'Biometric Auth',    sub: 'Speaker embed.',     active: false },
-  { type: 'arrow' },
-  { type: 'node', icon: <IconCheck />,      label: 'Decision Engine',   sub: 'Grant / Deny',       active: false },
+  { type: 'node', icon: <IconRobot />,      label: 'Stage 4 · NLP',      sub: 'Qwen · Gemma · rules',        active: false },
 ]
 
 const layers = [
-  { tag: 'Layer 1 · Feature Front-End', name: 'MFCC + Mel-Spectrogram Extraction', desc: '40-dimensional MFCC coefficients and 128-band Mel-spectrograms from 1-second windows (25ms frames, 10ms hop). Captures timbral texture and temporal dynamics that synthetic vocoders consistently distort.' },
-  { tag: 'Layer 2 · Spatial Patterns', name: 'Convolutional Neural Network (4-layer)', desc: 'Extracts local spectral patterns — phase inconsistencies, vocoder artifacts, and unnatural harmonic structures that distinguish AI-generated from genuine speech at the feature map level.' },
-  { tag: 'Layer 3 · Temporal Context', name: 'Bidirectional LSTM (2-layer)', desc: 'Processes CNN output sequences to capture long-range temporal dependencies. Critical for detecting synthesis artifacts that manifest over multi-frame windows, not instantaneously.' },
-  { tag: 'Output', name: 'Binary Classification + Confidence Score', desc: 'Sigmoid output layer produces a 0–1 probability (0 = genuine, 1 = synthetic) with threshold-adjustable sensitivity for different risk tolerance requirements.' },
+  { tag: 'Stage 1 · Audio DSP', name: 'librosa preprocessing', desc: 'Load → resample 16 kHz mono → STFT → 128 Mel bins → dB normalisation → resize 224×224 → stack to a 3×224×224 float32 tensor aligned with ImageNet-pretrained backbones.' },
+  { tag: 'Stage 2 · CV inference', name: 'EfficientNet-B4 + ONNX Runtime', desc: 'Spectrogram is classified as bonafide vs spoof with a two-logit head; sigmoid on the spoof logit yields a score in [0, 1] with an EER-tuned threshold at 0.93 on the FoR for-2sec split.' },
+  { tag: 'Stage 3 · Grad-CAM (XAI)', name: 'Saliency on the last conv feature map', desc: 'Gradients of the predicted class w.r.t. late feature maps produce a heatmap (Jet overlay at 50%) plus four-band Mel attribution so users see which frequency regions drove the verdict.' },
+  { tag: 'Stage 4 · NLP explanation', name: 'Instruction-tuned LLM with resilient fallbacks', desc: 'A structured prompt carries label, confidence, and band weights; Qwen 2.5-7B-Instruct is called async via the HF API, then Gemma 2B, then a local rule-based explainer so the UI never returns an empty story.' },
 ]
 
 const techStack = [
-  { label: 'Machine Learning', chips: [{ name: 'PyTorch', y: true }, { name: 'librosa', y: true }, { name: 'scikit-learn', y: true }, { name: 'NumPy', y: false }, { name: 'HuggingFace', y: false }] },
-  { label: 'Backend', chips: [{ name: 'FastAPI', y: true }, { name: 'PostgreSQL', y: false }, { name: 'Redis', y: false }, { name: 'WebSocket', y: false }] },
-  { label: 'Frontend', chips: [{ name: 'React', y: true }, { name: 'TypeScript', y: false }, { name: 'Tailwind', y: false }, { name: 'Recharts', y: false }] },
-  { label: 'Dataset', chips: [{ name: 'ASVspoof 2019', y: true }, { name: 'VCTK Corpus', y: false }, { name: 'In-the-Wild', y: false }] },
+  { label: 'Machine learning', chips: [{ name: 'PyTorch', y: true }, { name: 'ONNX Runtime', y: true }, { name: 'librosa', y: true }, { name: 'grad-cam', y: true }, { name: 'scikit-learn', y: false }] },
+  { label: 'Explainability & APIs', chips: [{ name: 'Grad-CAM', y: true }, { name: 'HF Inference API', y: false }, { name: 'OpenAI-compatible client', y: false }] },
+  { label: 'App & deployment', chips: [{ name: 'Gradio 4.44', y: true }, { name: 'Hugging Face Spaces', y: true }, { name: 'Python 3.10', y: false }] },
+  { label: 'Dataset', chips: [{ name: 'FoR for-2sec', y: true }, { name: 'Fake-or-Real (FoR)', y: false }, { name: 'Kaggle', y: false }] },
 ]
 
 export default function Architecture() {
@@ -52,7 +48,7 @@ export default function Architecture() {
             <em className="not-italic text-white/20 font-normal">works.</em>
           </h2>
           <p className="mt-3 text-[15px] text-white/40 font-light max-w-[510px] leading-[1.75]">
-            A sequential, dual-layer pipeline that moves from raw audio to a verified identity decision in under 300ms.
+            The same four-stage story as on Medium: WAV/FLAC in, Mel tensor out of DSP, EfficientNet-B4 ONNX for the score, Grad-CAM for proof, NLP for a human-readable paragraph — wired together in Gradio on Hugging Face Spaces.
           </p>
         </div>
 
@@ -64,15 +60,15 @@ export default function Architecture() {
             ) : (
               <div
                 key={i}
-                className={`border rounded-[10px] px-3 py-3.5 text-center min-w-[112px] bg-bg cursor-default transition-all hover:border-[rgba(240,224,64,0.18)] hover:bg-[rgba(240,224,64,0.07)] hover:-translate-y-[3px] ${
+                className={`border rounded-[10px] px-2.5 py-3.5 text-center min-w-[118px] max-w-[140px] md:min-w-[128px] md:max-w-none bg-bg cursor-default transition-all hover:border-[rgba(185,154,46,0.22)] hover:bg-[rgba(185,154,46,0.08)] hover:-translate-y-[3px] ${
                   item.active
-                    ? 'border-[rgba(240,224,64,0.18)] bg-[rgba(240,224,64,0.05)]'
+                    ? 'border-[rgba(185,154,46,0.22)] bg-[rgba(185,154,46,0.07)]'
                     : 'border-bd'
                 }`}
               >
                 <div className="text-[18px] mb-[5px]">{item.icon}</div>
-                <div className="text-[13px] font-medium text-white mb-0.5">{item.label}</div>
-                <div className={`font-mono-c text-[10px] tracking-[0.04em] ${item.subYellow ? 'text-y' : 'text-mt'}`}>
+                <div className="text-[12px] md:text-[13px] font-medium text-white mb-0.5 leading-snug">{item.label}</div>
+                <div className={`font-mono-c text-[9px] md:text-[10px] tracking-[0.04em] leading-tight ${item.subYellow ? 'text-y' : 'text-mt'}`}>
                   {item.sub}
                 </div>
               </div>
@@ -83,7 +79,7 @@ export default function Architecture() {
         {/* Figure 2 */}
         <div className="border border-bd rounded-xl overflow-hidden bg-surf mb-[42px] rv">
           <div className="relative p-3 md:p-4 bg-[#0d0d0d]">
-            <span className="absolute top-4 left-4 z-10 font-mono-c text-[9px] bg-[rgba(240,224,64,0.07)] border border-[rgba(240,224,64,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
+            <span className="absolute top-4 left-4 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.1)] border border-[rgba(185,154,46,0.22)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
               Fig. 2
             </span>
             <img
@@ -98,14 +94,14 @@ export default function Architecture() {
           </p>
         </div>
 
-        {/* Two-column: layers + tech stack */}
+        {/* Two-column: stages + tech stack */}
         <div className="grid md:grid-cols-2 gap-8 rv">
           <div>
             <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase mb-[14px] block">
-              Detection Model Layers
+              Pipeline stages (detail)
             </span>
             {layers.map((l) => (
-              <div key={l.tag} className="border border-bd rounded-[10px] p-4 mb-2 transition-[border-color] duration-200 hover:border-bdh">
+              <div key={l.tag} className="border border-bd rounded-[10px] p-4 mb-2 transition-[border-color] duration-200 hover:border-bdh bg-[rgba(185,154,46,0.04)]">
                 <div className="font-mono-c text-[9px] text-y tracking-[0.08em] mb-[5px] uppercase">{l.tag}</div>
                 <div className="text-[14px] font-medium text-white/[0.78] mb-[5px]">{l.name}</div>
                 <div className="text-[13px] text-mt font-light leading-[1.65]">{l.desc}</div>
@@ -115,7 +111,7 @@ export default function Architecture() {
 
           <div>
             <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase mb-[14px] block">
-              Technology Stack
+              Technology stack
             </span>
             <div className="grid grid-cols-2 gap-8 md:gap-8 max-md:grid-cols-1 max-md:gap-[22px]">
               {techStack.map((group) => (
@@ -129,8 +125,8 @@ export default function Architecture() {
                         key={chip.name}
                         className={`font-mono-c text-[11px] px-[11px] py-[5px] rounded-[5px] border cursor-default transition-all duration-200 ${
                           chip.y
-                            ? 'border-[rgba(240,224,64,0.18)] text-y bg-[rgba(240,224,64,0.07)]'
-                            : 'border-bd text-white/[0.48] hover:border-[rgba(240,224,64,0.18)] hover:text-y hover:bg-[rgba(240,224,64,0.07)]'
+                            ? 'border-[rgba(185,154,46,0.22)] text-y bg-[rgba(185,154,46,0.08)]'
+                            : 'border-bd text-white/[0.48] hover:border-[rgba(185,154,46,0.22)] hover:text-y hover:bg-[rgba(185,154,46,0.08)]'
                         }`}
                       >
                         {chip.name}
@@ -147,10 +143,10 @@ export default function Architecture() {
                 className="flex items-center justify-center flex-col gap-2 p-6 relative min-h-[150px]"
                 style={{
                   backgroundImage:
-                    'repeating-linear-gradient(45deg,rgba(240,224,64,.02) 0,rgba(240,224,64,.02) 1px,transparent 1px,transparent 12px),repeating-linear-gradient(-45deg,rgba(240,224,64,.02) 0,rgba(240,224,64,.02) 1px,transparent 1px,transparent 12px)',
+                    'repeating-linear-gradient(45deg,rgba(185,154,46,.03) 0,rgba(185,154,46,.03) 1px,transparent 1px,transparent 12px),repeating-linear-gradient(-45deg,rgba(185,154,46,.03) 0,rgba(185,154,46,.03) 1px,transparent 1px,transparent 12px)',
                 }}
               >
-                <span className="absolute top-3 left-3 font-mono-c text-[9px] bg-[rgba(240,224,64,0.07)] border border-[rgba(240,224,64,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
+                <span className="absolute top-3 left-3 font-mono-c text-[9px] bg-[rgba(185,154,46,0.1)] border border-[rgba(185,154,46,0.22)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
                   Fig. 3
                 </span>
                 <IconLineChart size={28} />

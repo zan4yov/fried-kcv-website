@@ -27,10 +27,14 @@ export default function Nav() {
     >
       <div className="max-w-page w-full mx-auto flex items-center justify-between">
         <a href="#" className="flex items-center gap-[9px] no-underline">
-          <div className="w-7 h-7 bg-y rounded-md flex items-center justify-center font-mono-c text-[11px] font-medium text-black">
-            DS
-          </div>
-          <span className="text-[13px] font-medium text-white/60">DeepSpeech Auth</span>
+          <img
+            src="/favicon.svg"
+            alt="Fake67"
+            width={28}
+            height={28}
+            className="w-7 h-7 rounded-md object-contain shrink-0 ring-1 ring-[rgba(185,154,46,0.25)]"
+          />
+          <span className="text-[13px] font-medium text-white/60">Fake67</span>
         </a>
 
         <div className="hidden md:flex">

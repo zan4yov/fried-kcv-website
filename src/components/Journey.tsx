@@ -11,7 +11,7 @@ interface Story { icon: ReactNode; title: string; desc: string; last?: boolean }
 
 const obstacles: Obstacle[] = [
   { tag: 'Data · Week 2',           title: 'Severely imbalanced training data',  desc: 'Real audio samples were significantly outnumbered by synthetic ones in public datasets. SMOTE oversampling and custom augmentation fixed class imbalance — but we had to re-evaluate our entire baseline when early accuracy turned out to be misleadingly inflated.' },
-  { tag: 'Performance · Week 4',    title: 'The 300ms latency wall',             desc: 'Running the deepfake detector and biometric verifier simultaneously in real time seemed impossible. We achieved it through INT8 model quantization, async pipeline design, and two weeks of profiling every microsecond of overhead.' },
+  { tag: 'Performance · Week 4',    title: 'The CPU-only Spaces wall',           desc: 'Gradio had to orchestrate ONNX, Grad-CAM, and three NLP fallbacks without a GPU. Profiling each stage, caching tensors, and tightening async HF calls got us inside the <15s target most of the time — with plenty of retries when the API queue stalled.' },
   { tag: 'Generalization · Week 5', title: 'Model overfitting to seen speakers', desc: 'Early models scored 97% in training but collapsed on unseen speakers. We rebuilt feature engineering to focus on synthesis artifacts in the spectral domain rather than speaker-specific acoustic fingerprints. Cost us a week, but made the model actually useful.' },
   { tag: 'Infrastructure · Week 6', title: 'Cross-codec audio preprocessing',   desc: 'Audio compressed via different codecs (MP3, AAC, Opus) introduced noise our model mistook for synthesis artifacts. A preprocessing normalization layer solved it — after two frustrating weeks of chasing ghost false positives.', last: true },
 ]
@@ -42,14 +42,14 @@ export default function Journey() {
       <div className="grid md:grid-cols-2 gap-[46px]">
         {/* Obstacles */}
         <div>
-          <div className="font-mono-c text-[10px] tracking-[0.18em] uppercase mb-[18px] flex items-center gap-2.5" style={{ color: 'rgba(240,224,64,0.55)' }}>
+          <div className="font-mono-c text-[10px] tracking-[0.18em] uppercase mb-[18px] flex items-center gap-2.5" style={{ color: 'rgba(185,154,46,0.55)' }}>
             <IconWarning size={13} style={{ flexShrink: 0 }} />
             Obstacles we faced
             <span className="h-px flex-1 bg-bd" />
           </div>
           {obstacles.map((item) => (
             <div key={item.tag} className="group">
-              <div className={`border-l-2 border-bd pl-4 relative cursor-default transition-[border-color] hover:border-[rgba(240,224,64,0.18)] ${item.last ? '' : 'pb-6'}`}>
+              <div className={`border-l-2 border-bd pl-4 relative cursor-default transition-[border-color] hover:border-[rgba(185,154,46,0.18)] ${item.last ? '' : 'pb-6'}`}>
                 <div className="absolute left-[-5px] top-[5px] w-[7px] h-[7px] rounded-[2px] bg-mt2 transition-colors group-hover:bg-y" />
                 <p className="font-mono-c text-[9px] tracking-[0.1em] uppercase text-mt2 mb-1.5">{item.tag}</p>
                 <p className="text-sm font-medium text-white mb-1.5">{item.title}</p>
@@ -68,7 +68,7 @@ export default function Journey() {
           </div>
           {stories.map((item) => (
             <div key={item.title} className="group">
-              <div className={`border-l-2 border-bd pl-4 relative cursor-default transition-[border-color] hover:border-[rgba(240,224,64,0.18)] ${item.last ? '' : 'pb-6'}`}>
+              <div className={`border-l-2 border-bd pl-4 relative cursor-default transition-[border-color] hover:border-[rgba(185,154,46,0.18)] ${item.last ? '' : 'pb-6'}`}>
                 <div className="absolute left-[-5px] top-[5px] w-[7px] h-[7px] rounded-[2px] bg-mt2 transition-colors group-hover:bg-y" />
                 <div className="mb-1.5">{item.icon}</div>
                 <p className="text-sm font-medium text-white mb-1.5">{item.title}</p>

@@ -1,15 +1,15 @@
 const members = [
   {
-    initial: 'F', name: 'Ferel', role: 'ML Engineer', accent: '#f0e040',
+    initial: 'F', name: 'Ferel', role: 'ML Engineer', accent: '#b99a2e',
     tasks: [
-      'CNN+LSTM deepfake detection architecture & training',
-      'MFCC + Mel-spectrogram feature extraction pipeline',
+      'EfficientNet-B4 training, evaluation, and ONNX export',
+      'Mel-spectrogram + librosa DSP pipeline aligned with Medium FR-AUD specs',
       'Model evaluation, benchmarking & hyperparameter tuning',
       'Dataset curation, augmentation & class balancing',
       'Research documentation & Medium article writeup',
     ],
     quote: '"Building the brain that tells real from fake — one epoch at a time."',
-    quoteBorder: 'rgba(240,224,64,0.28)',
+    quoteBorder: 'rgba(185,154,46,0.28)',
   },
   {
     initial: 'S', name: 'Safa', role: 'Backend Engineer', accent: '#A78BFA',
@@ -57,7 +57,7 @@ export default function Team() {
         {members.map((m) => (
           <div
             key={m.name}
-            className="border border-bd rounded-xl px-[22px] py-6 flex flex-col gap-[18px] transition-all duration-200 hover:border-[rgba(240,224,64,0.18)] hover:bg-[rgba(240,224,64,0.07)]"
+            className="border border-bd rounded-xl px-[22px] py-6 flex flex-col gap-[18px] transition-all duration-200 hover:border-[rgba(185,154,46,0.18)] hover:bg-[rgba(185,154,46,0.07)]"
           >
             <div
               className="w-[42px] h-[42px] rounded-[9px] flex items-center justify-center font-serif-i text-[19px] text-black"

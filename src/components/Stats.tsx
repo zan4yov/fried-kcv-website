@@ -1,8 +1,8 @@
 const stats = [
-  { value: '94.7%',  label: 'Detection accuracy' },
-  { value: '<300ms', label: 'End-to-end latency'  },
-  { value: '12K+',   label: 'Training samples'    },
-  { value: '5.8%',   label: 'Equal error rate'    },
+  { value: '0.974',  label: 'AUC-ROC (FoR split)' },
+  { value: '86.1%',  label: 'Accuracy @ thr 0.93' },
+  { value: '0.858',  label: 'F1 score' },
+  { value: '<15s',    label: 'CPU demo target' },
 ]
 
 export default function Stats() {

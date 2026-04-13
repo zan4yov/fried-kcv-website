@@ -1,9 +1,9 @@
 const goals = [
-  { n: '01', title: 'Detect synthetic speech accurately',   desc: 'Classify AI-generated audio via MFCC + Mel-spectrogram features and a CNN+LSTM model, targeting EER below 6%.' },
-  { n: '02', title: 'Multi-modal biometric authentication', desc: 'Combine voice, facial, and behavioral biometric patterns for robust, hard-to-spoof identity verification.' },
-  { n: '03', title: 'Real-time pipeline (<300ms)',          desc: 'Process audio end-to-end from raw input to grant/deny decision within 300ms for live authentication.' },
-  { n: '04', title: 'Speaker-independent generalization',   desc: 'Detect deepfakes regardless of speaker identity by targeting synthesis artifacts, not voice-specific fingerprints.' },
-  { n: '05', title: 'Noise-robust field performance',       desc: 'Maintain reliability under real-world acoustic conditions using RawBoost-inspired noise augmentation during training.' },
+  { n: '01', title: 'Spectrogram-first spoof detection',    desc: 'Treat each clip as a visual task: 128-bin Mel → 224² RGB-style tensor → EfficientNet-B4 with a two-logit head, tuned to the FoR for-2sec split with an EER-aligned threshold at 0.93.' },
+  { n: '02', title: 'Show your work with Grad-CAM',        desc: 'Surface class-discriminative regions on the Mel image, Jet overlay at 50% opacity, and four-band frequency attribution so users see why the model hesitated or flagged spoof.' },
+  { n: '03', title: 'Ship a CPU-friendly demo',            desc: 'Package the full four-stage stack inside Gradio on Hugging Face Spaces with ONNX Runtime so classmates can upload a file without GPUs and still get a verdict under ~15 seconds.' },
+  { n: '04', title: 'Narrate every run',                   desc: 'Pipe logits, confidence, and band weights into Qwen 2.5-7B-Instruct (async HF API), then Gemma 2B, then a deterministic fallback so the explanation column never comes back empty.' },
+  { n: '05', title: 'Stay honest on limitations',           desc: 'Document codec quirks, HF rate limits, and the Liar’s Dividend findings from our blind listening study so the UI reads as research-grade, not magic.' },
 ]
 
 export default function Overview() {
@@ -32,7 +32,7 @@ export default function Overview() {
               Modern voice cloning architectures — including flow-matching and hierarchical neural codecs — have moved far beyond early robotic TTS. Today's synthetic voices replicate cadence, intonation, and even micro-pauses of human speech, bypassing both human ears and legacy speaker verification.
             </p>
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              We built a <strong className="text-white/[0.72] font-medium">dual-layer defense</strong>: a deepfake speech detector that classifies audio as genuine or synthetic, combined with a biometric authentication pipeline that verifies real user identity — without adding perceptible latency to the experience.
+              <strong className="text-white/[0.72] font-medium">Fake67</strong> is our response: a four-stage, explainable pipeline that pairs EfficientNet-B4 on Mel spectrograms with Grad-CAM saliency and an LLM stack that narrates the evidence — the same story we published on Medium and ship today on Hugging Face Spaces.
             </p>
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
               The core insight: synthetic voices leave <strong className="text-white/[0.72] font-medium">acoustic artifacts invisible to the human ear</strong> but statistically consistent across generation models — detectable through spectral analysis and deep neural networks trained on both real and AI-generated speech.
@@ -42,7 +42,7 @@ export default function Overview() {
           {/* Figure 1 */}
           <div className="border border-bd rounded-xl overflow-hidden bg-surf mt-6 rv">
             <div className="relative p-3 md:p-4 bg-[#0d0d0d]">
-              <span className="absolute top-4 left-4 z-10 font-mono-c text-[9px] bg-[rgba(240,224,64,0.07)] border border-[rgba(240,224,64,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
+              <span className="absolute top-4 left-4 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.07)] border border-[rgba(185,154,46,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
                 Fig. 1
               </span>
               <img
@@ -66,7 +66,7 @@ export default function Overview() {
             {goals.map((g) => (
               <div
                 key={g.n}
-                className="border border-bd rounded-[10px] p-4 flex gap-[14px] transition-all duration-200 hover:border-[rgba(240,224,64,0.18)] hover:bg-[rgba(240,224,64,0.07)] cursor-default"
+                className="border border-bd rounded-[10px] p-4 flex gap-[14px] transition-all duration-200 hover:border-[rgba(185,154,46,0.18)] hover:bg-[rgba(185,154,46,0.07)] cursor-default"
               >
                 <span className="font-mono-c text-[11px] text-y min-w-[18px] pt-0.5 flex-shrink-0">{g.n}</span>
                 <div>
