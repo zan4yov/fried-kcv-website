@@ -6,11 +6,11 @@ import { IconLineChart } from './icons/IconLineChart'
 import { IconRobot } from './icons/IconRobot'
 
 type PipelineItem =
-  | { type: 'node'; icon: ReactNode; label: string; sub: string; active: boolean; subYellow?: boolean }
+  | { type: 'node'; icon: ReactNode; label: string; sub?: string; active: boolean; subYellow?: boolean }
   | { type: 'arrow' }
 
 const PIPELINE_TO_LAYER_TAG: Record<string, string> = {
-  'Audio input': 'Stage 1 · Audio DSP',
+  'Audio input': 'Audio input',
   'Stage 1 · Audio DSP': 'Stage 1 · Audio DSP',
   'Stage 2 · CV inference': 'Stage 2 · CV inference',
   'Stage 3 · Grad-CAM': 'Stage 3 · Grad-CAM (XAI)',
@@ -18,7 +18,7 @@ const PIPELINE_TO_LAYER_TAG: Record<string, string> = {
 }
 
 const pipelineItems: PipelineItem[] = [
-  { type: 'node', icon: <IconMic />,        label: 'Audio input',        sub: 'User mengupload audio WAV/FLAC', active: false },
+  { type: 'node', icon: <IconMic />, label: 'Audio input', active: false },
   { type: 'arrow' },
   { type: 'node', icon: <IconWaveSignal />, label: 'Stage 1 · Audio DSP', sub: 'STFT · Mel · 224²',            active: false },
   { type: 'arrow' },
@@ -30,6 +30,11 @@ const pipelineItems: PipelineItem[] = [
 ]
 
 const layers = [
+  {
+    tag: 'Audio input',
+    name: 'User-supplied clip',
+    desc: 'The user uploads a WAV or FLAC file through the Gradio interface. We standardise on those formats so Stage 1 receives PCM audio without extra lossy compression artefacts before resampling to 16 kHz mono for the Mel pipeline.',
+  },
   { tag: 'Stage 1 · Audio DSP', name: 'librosa preprocessing', desc: 'Load → resample 16 kHz mono → STFT → 128 Mel bins → dB normalisation → resize 224×224 → stack to a 3×224×224 float32 tensor aligned with ImageNet-pretrained backbones.' },
   { tag: 'Stage 2 · CV inference', name: 'EfficientNet-B4 + ONNX Runtime', desc: 'Spectrogram is classified as bonafide vs spoof with a two-logit head; sigmoid on the spoof logit yields a score in [0, 1] with an EER-tuned threshold at 0.93 on the FoR for-2sec split.' },
   { tag: 'Stage 3 · Grad-CAM (XAI)', name: 'Saliency on the last conv feature map', desc: 'Gradients of the predicted class w.r.t. late feature maps produce a heatmap (Jet overlay at 50%) plus four-band Mel attribution so users see which frequency regions drove the verdict.' },
@@ -132,9 +137,11 @@ export default function Architecture() {
               >
                 <div className="text-[18px] mb-[5px]">{item.icon}</div>
                 <div className="text-[12px] md:text-[13px] font-medium text-white mb-0.5 leading-snug">{item.label}</div>
-                <div className={`font-mono-c text-[9px] md:text-[10px] tracking-[0.04em] leading-tight ${isSubYellow ? 'text-y' : 'text-mt'}`}>
-                  {item.sub}
-                </div>
+                {item.sub ? (
+                  <div className={`font-mono-c text-[9px] md:text-[10px] tracking-[0.04em] leading-tight ${isSubYellow ? 'text-y' : 'text-mt'}`}>
+                    {item.sub}
+                  </div>
+                ) : null}
               </div>
                 )
               })()
