@@ -5,8 +5,6 @@ import { IconDna } from './icons/IconDna'
 import { IconHistogram } from './icons/IconHistogram'
 import { IconBolt } from './icons/IconBolt'
 import { IconFace } from './icons/IconFace'
-import { IconBarChart } from './icons/IconBarChart'
-
 interface Fact { icon: ReactNode; title: string; text: string }
 
 const facts: Fact[] = [
@@ -47,26 +45,22 @@ export default function Facts() {
         ))}
       </div>
 
-      {/* Figure 4 */}
+      {/* Figure 4 — interactive Chart.js embed */}
       <div className="border border-bd rounded-xl overflow-hidden bg-surf mt-8 rv">
-        <div
-          className="aspect-video flex items-center justify-center flex-col gap-2 p-6 relative min-h-[190px]"
-          style={{
-            backgroundImage:
-              'repeating-linear-gradient(45deg,rgba(240,224,64,.02) 0,rgba(240,224,64,.02) 1px,transparent 1px,transparent 12px),repeating-linear-gradient(-45deg,rgba(240,224,64,.02) 0,rgba(240,224,64,.02) 1px,transparent 1px,transparent 12px)',
-          }}
-        >
-          <span className="absolute top-3 left-3 font-mono-c text-[9px] bg-[rgba(240,224,64,0.07)] border border-[rgba(240,224,64,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
+        <div className="relative bg-[#0a0a0a]">
+          <span className="absolute top-3 left-3 z-10 font-mono-c text-[9px] bg-[rgba(240,224,64,0.07)] border border-[rgba(240,224,64,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
             Fig. 4
           </span>
-          <IconBarChart size={28} />
-          <p className="font-mono-c text-[10px] tracking-widest text-mt2 text-center relative z-10 uppercase">
-            Model Performance Results
-            <small className="block mt-0.5 text-[9px] text-[#2e2e2e]">Replace with your evaluation charts / confusion matrix from the article</small>
-          </p>
+          <iframe
+            title="Figure 4 — Model performance: metrics, ROC curve, and confusion matrix"
+            src="/figures/figure4_model_performance.html"
+            className="w-full min-h-[520px] border-0 block"
+            sandbox="allow-scripts allow-same-origin"
+            loading="lazy"
+          />
         </div>
         <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
-          Figure 4 — Detection accuracy, EER curve, and confusion matrix across test splits
+          Figure 4 — AUC-ROC, accuracy, F1, confusion matrix, and ROC curve (FoR for-2sec split)
         </p>
       </div>
     </section>

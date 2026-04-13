@@ -5,7 +5,6 @@ import { IconBars } from './icons/IconBars'
 import { IconBrain } from './icons/IconBrain'
 import { IconLock } from './icons/IconLock'
 import { IconCheck } from './icons/IconCheck'
-import { IconFolder } from './icons/IconFolder'
 import { IconLineChart } from './icons/IconLineChart'
 
 type PipelineItem =
@@ -83,24 +82,19 @@ export default function Architecture() {
 
         {/* Figure 2 */}
         <div className="border border-bd rounded-xl overflow-hidden bg-surf mb-[42px] rv">
-          <div
-            className="aspect-video flex items-center justify-center flex-col gap-2 p-6 relative min-h-[190px]"
-            style={{
-              backgroundImage:
-                'repeating-linear-gradient(45deg,rgba(240,224,64,.02) 0,rgba(240,224,64,.02) 1px,transparent 1px,transparent 12px),repeating-linear-gradient(-45deg,rgba(240,224,64,.02) 0,rgba(240,224,64,.02) 1px,transparent 1px,transparent 12px)',
-            }}
-          >
-            <span className="absolute top-3 left-3 font-mono-c text-[9px] bg-[rgba(240,224,64,0.07)] border border-[rgba(240,224,64,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
+          <div className="relative p-3 md:p-4 bg-[#0d0d0d]">
+            <span className="absolute top-4 left-4 z-10 font-mono-c text-[9px] bg-[rgba(240,224,64,0.07)] border border-[rgba(240,224,64,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
               Fig. 2
             </span>
-            <IconFolder size={28} />
-            <p className="font-mono-c text-[10px] tracking-widest text-mt2 text-center relative z-10 uppercase">
-              Detailed Architecture Diagram
-              <small className="block mt-0.5 text-[9px] text-[#2e2e2e]">Replace with your CNN+LSTM architecture from the article</small>
-            </p>
+            <img
+              src="/figures/figure2_efficientnet_architecture.svg"
+              alt="Figure 2 — EfficientNet-B4 architecture for spectrogram-based deepfake detection"
+              className="w-full h-auto block rounded-lg"
+              loading="lazy"
+            />
           </div>
           <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
-            Figure 2 — CNN+LSTM model architecture and biometric fusion layer
+            Figure 2 — EfficientNet-B4 backbone and classifier head (ONNX inference path)
           </p>
         </div>
 

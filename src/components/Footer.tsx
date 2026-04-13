@@ -16,7 +16,7 @@ export default function Footer() {
           </div>
           <span className="text-[13px] font-medium text-white/45">DeepSpeech Auth</span>
         </div>
-        <div className="text-xs text-mt2">© 2026 Ferel · Safa · Razan — Final Year Project</div>
+        <div className="text-xs text-mt2">© 2026 Ferel · Safa · Razan — Final Project KCVanguard 2026</div>
       </div>
 
       <div className="flex gap-[5px] flex-wrap">

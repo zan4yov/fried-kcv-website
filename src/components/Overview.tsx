@@ -1,5 +1,3 @@
-import { IconMic } from './icons/IconMic'
-
 const goals = [
   { n: '01', title: 'Detect synthetic speech accurately',   desc: 'Classify AI-generated audio via MFCC + Mel-spectrogram features and a CNN+LSTM model, targeting EER below 6%.' },
   { n: '02', title: 'Multi-modal biometric authentication', desc: 'Combine voice, facial, and behavioral biometric patterns for robust, hard-to-spoof identity verification.' },
@@ -43,24 +41,19 @@ export default function Overview() {
 
           {/* Figure 1 */}
           <div className="border border-bd rounded-xl overflow-hidden bg-surf mt-6 rv">
-            <div
-              className="aspect-video flex items-center justify-center flex-col gap-2 p-6 relative min-h-[190px]"
-              style={{
-                backgroundImage:
-                  'repeating-linear-gradient(45deg,rgba(240,224,64,.02) 0,rgba(240,224,64,.02) 1px,transparent 1px,transparent 12px),repeating-linear-gradient(-45deg,rgba(240,224,64,.02) 0,rgba(240,224,64,.02) 1px,transparent 1px,transparent 12px)',
-              }}
-            >
-              <span className="absolute top-3 left-3 font-mono-c text-[9px] bg-[rgba(240,224,64,0.07)] border border-[rgba(240,224,64,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
+            <div className="relative p-3 md:p-4 bg-[#0d0d0d]">
+              <span className="absolute top-4 left-4 z-10 font-mono-c text-[9px] bg-[rgba(240,224,64,0.07)] border border-[rgba(240,224,64,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
                 Fig. 1
               </span>
-              <IconMic size={28} />
-              <p className="font-mono-c text-[10px] tracking-widest text-mt2 text-center relative z-10 uppercase">
-                System Overview Diagram
-                <small className="block mt-0.5 text-[9px] text-[#2e2e2e]">Replace with your image from the Medium article</small>
-              </p>
+              <img
+                src="/figures/figure1_system_overview.svg"
+                alt="Figure 1 — Fake67 four-stage detection pipeline: WAV/FLAC through Audio DSP, CV inference, Grad-CAM, and NLP explanation"
+                className="w-full h-auto block rounded-lg"
+                loading="lazy"
+              />
             </div>
             <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
-              Figure 1 — High-level overview of the dual-layer detection &amp; authentication pipeline
+              Figure 1 — Fake67 four-stage system overview (audio DSP → EfficientNet-B4 → Grad-CAM → NLP)
             </p>
           </div>
         </div>
