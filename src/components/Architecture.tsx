@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { IconMic } from './icons/IconMic'
 import { IconWaveSignal } from './icons/IconWaveSignal'
 import { IconBrain } from './icons/IconBrain'
@@ -43,10 +43,7 @@ const techStack = [
   { label: 'Dataset', chips: [{ name: 'FoR for-2sec', y: true }, { name: 'Fake-or-Real (FoR)', y: false }, { name: 'Kaggle', y: false }] },
 ]
 
-const FIG3_MSG = 'fried-figure3-size'
-
 export default function Architecture() {
-  const fig3FrameRef = useRef<HTMLIFrameElement>(null)
   const [selectedLayerTag, setSelectedLayerTag] = useState<string | null>(null)
 
   const selectedLayer = useMemo(() => {
@@ -68,17 +65,6 @@ export default function Architecture() {
     document.addEventListener('keydown', onKeyDown)
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [selectedLayerTag])
-
-  useEffect(() => {
-    const onMsg = (e: MessageEvent) => {
-      if (e.data?.type !== FIG3_MSG || typeof e.data.height !== 'number') return
-      const el = fig3FrameRef.current
-      if (!el) return
-      el.style.height = `${Math.ceil(e.data.height)}px`
-    }
-    window.addEventListener('message', onMsg)
-    return () => window.removeEventListener('message', onMsg)
-  }, [])
 
   return (
     <div id="architecture" className="bg-surf border-t border-b border-bd py-20 px-8">
@@ -211,55 +197,33 @@ export default function Architecture() {
           </p>
         </div>
 
-        {/* Technology + Figure 3 */}
-        <div className="grid lg:grid-cols-2 gap-8 rv">
-          <div className="border border-bd rounded-2xl bg-bg/60 p-5 md:p-6">
-            <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase mb-4 block">
-              Technology stack
-            </span>
-            <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1 max-md:gap-[22px]">
-              {techStack.map((group) => (
-                <div key={group.label}>
-                  <div className="font-mono-c text-[10px] tracking-[0.14em] text-mt2 uppercase mb-[11px]">
-                    {group.label}
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {group.chips.map((chip) => (
-                      <span
-                        key={chip.name}
-                        className={`font-mono-c text-[11px] px-[11px] py-[5px] rounded-[5px] border cursor-default transition-all duration-200 ${
-                          chip.y
-                            ? 'border-[rgba(185,154,46,0.22)] text-y bg-[rgba(185,154,46,0.08)]'
-                            : 'border-bd text-white/[0.48] hover:border-[rgba(185,154,46,0.22)] hover:text-y hover:bg-[rgba(185,154,46,0.08)]'
-                        }`}
-                      >
-                        {chip.name}
-                      </span>
-                    ))}
-                  </div>
+        {/* Technology stack (full width) */}
+        <div className="rv border border-bd rounded-2xl bg-bg/60 p-5 md:p-8">
+          <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase mb-5 md:mb-6 block">
+            Technology stack
+          </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-10">
+            {techStack.map((group) => (
+              <div key={group.label} className="min-w-0">
+                <div className="font-mono-c text-[10px] tracking-[0.14em] text-mt2 uppercase mb-3">
+                  {group.label}
                 </div>
-              ))}
-            </div>
-          </div>
-
-            {/* Figure 3, interactive Mel comparison (canvas) */}
-          <div className="border border-bd rounded-2xl overflow-hidden bg-surf">
-            <div className="relative bg-[#0a0a0a]">
-              <span className="absolute top-3 left-3 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.1)] border border-[rgba(185,154,46,0.22)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
-                Fig. 3
-              </span>
-              <iframe
-                ref={fig3FrameRef}
-                  title="Figure 3, Mel spectrogram comparison: genuine vs AI-generated TTS"
-                src="/figures/figure3_mel_spectrogram_comparison.html"
-                className="w-full min-h-[360px] md:min-h-[440px] border-0 block"
-                sandbox="allow-scripts allow-same-origin"
-                loading="lazy"
-              />
-            </div>
-            <p className="text-xs text-mt px-4 py-3 border-t border-bd italic text-center">
-                Figure 3, genuine vs. synthetic Mel spectrograms with band attribution and Grad-CAM-style highlight (2–4 kHz artifact zone)
-            </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {group.chips.map((chip) => (
+                    <span
+                      key={chip.name}
+                      className={`font-mono-c text-[11px] px-[11px] py-[5px] rounded-[5px] border cursor-default transition-all duration-200 ${
+                        chip.y
+                          ? 'border-[rgba(185,154,46,0.22)] text-y bg-[rgba(185,154,46,0.08)]'
+                          : 'border-bd text-white/[0.48] hover:border-[rgba(185,154,46,0.22)] hover:text-y hover:bg-[rgba(185,154,46,0.08)]'
+                      }`}
+                    >
+                      {chip.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
