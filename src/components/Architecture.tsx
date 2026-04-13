@@ -47,7 +47,6 @@ const FIG3_MSG = 'fried-figure3-size'
 
 export default function Architecture() {
   const fig3FrameRef = useRef<HTMLIFrameElement>(null)
-  const stageDetailRef = useRef<HTMLDivElement>(null)
   const [selectedLayerTag, setSelectedLayerTag] = useState<string | null>(null)
 
   const selectedLayer = useMemo(() => {
@@ -59,8 +58,22 @@ export default function Architecture() {
     const tag = PIPELINE_TO_LAYER_TAG[pipelineLabel]
     if (!tag) return
     setSelectedLayerTag(tag)
-    requestAnimationFrame(() => stageDetailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
   }
+
+  useEffect(() => {
+    if (!selectedLayerTag) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedLayerTag(null)
+    }
+    document.addEventListener('keydown', onKeyDown)
+    // prevent background scroll while modal open
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      document.body.style.overflow = prevOverflow
+    }
+  }, [selectedLayerTag])
 
   useEffect(() => {
     const onMsg = (e: MessageEvent) => {
@@ -75,6 +88,52 @@ export default function Architecture() {
 
   return (
     <div id="architecture" className="bg-surf border-t border-b border-bd py-20 px-8">
+      {/* Stage details modal */}
+      {selectedLayer && (
+        <div
+          className="fixed inset-0 z-[80] flex items-center justify-center px-4 py-6"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${selectedLayer.tag} details`}
+        >
+          <button
+            type="button"
+            aria-label="Close stage details"
+            className="absolute inset-0 bg-black/70"
+            onClick={() => setSelectedLayerTag(null)}
+          />
+          <div className="relative w-full max-w-[720px] border border-[rgba(185,154,46,0.22)] bg-[#0b0b0b] rounded-2xl shadow-[0_30px_90px_rgba(0,0,0,0.65)] overflow-hidden">
+            <div className="p-5 md:p-6 border-b border-bd bg-[radial-gradient(1200px_500px_at_10%_-10%,rgba(185,154,46,0.12),transparent_60%),radial-gradient(900px_420px_at_90%_0%,rgba(185,154,46,0.08),transparent_55%)]">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <div className="font-mono-c text-[10px] tracking-[0.16em] uppercase text-y mb-2">
+                    {selectedLayer.tag}
+                  </div>
+                  <div className="text-[18px] md:text-[20px] font-semibold text-white leading-snug">
+                    {selectedLayer.name}
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSelectedLayerTag(null)}
+                  className="shrink-0 font-mono-c text-[10px] tracking-[0.16em] uppercase text-mt2 hover:text-y transition-colors border border-bd hover:border-[rgba(185,154,46,0.22)] rounded-md px-2.5 py-1.5 bg-bg"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+            <div className="p-5 md:p-6">
+              <div className="text-[14px] text-mt font-light leading-[1.75]">
+                {selectedLayer.desc}
+              </div>
+              <div className="mt-4 text-[11px] text-white/35 font-mono-c tracking-[0.12em] uppercase">
+                Tip: press Esc to close
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-page mx-auto">
         <div className="mb-[46px] rv">
           <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase mb-3 block">
@@ -151,34 +210,15 @@ export default function Architecture() {
 
         {/* Two-column: stages + tech stack */}
         <div className="grid md:grid-cols-2 gap-8 rv">
-          <div ref={stageDetailRef}>
-            {selectedLayer ? (
-              <div className="border border-bd rounded-[12px] p-4 transition-[border-color] duration-200 hover:border-bdh bg-[rgba(185,154,46,0.04)]">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <div className="font-mono-c text-[9px] text-y tracking-[0.08em] mb-[5px] uppercase">{selectedLayer.tag}</div>
-                    <div className="text-[14px] font-medium text-white/[0.78] mb-[5px]">{selectedLayer.name}</div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedLayerTag(null)}
-                    className="font-mono-c text-[10px] tracking-[0.16em] uppercase text-mt2 hover:text-y transition-colors border border-bd hover:border-[rgba(185,154,46,0.22)] rounded-md px-2 py-1 bg-bg"
-                  >
-                    Close
-                  </button>
-                </div>
-                <div className="text-[13px] text-mt font-light leading-[1.65]">{selectedLayer.desc}</div>
+          <div>
+            <div className="border border-bd rounded-[12px] p-4 bg-[rgba(185,154,46,0.03)]">
+              <div className="font-mono-c text-[10px] tracking-[0.16em] uppercase text-mt2">
+                Tap a stage above
               </div>
-            ) : (
-              <div className="border border-bd rounded-[12px] p-4 bg-[rgba(185,154,46,0.03)]">
-                <div className="font-mono-c text-[10px] tracking-[0.16em] uppercase text-mt2">
-                  Tap a stage above to view details
-                </div>
-                <div className="text-[13px] text-mt font-light leading-[1.65] mt-2">
-                  Select Stage 1–4 in the pipeline to reveal the corresponding explanation here.
-                </div>
+              <div className="text-[13px] text-mt font-light leading-[1.65] mt-2">
+                The explanation will pop up instantly (no scrolling).
               </div>
-            )}
+            </div>
           </div>
 
           <div>
