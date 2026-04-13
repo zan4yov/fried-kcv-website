@@ -27,9 +27,6 @@ export default function Facts() {
           Things we discovered<br />
           <em className="not-italic text-white/20 font-normal">along the way.</em>
         </h2>
-        <p className="mt-3 text-[15px] text-white/40 font-light max-w-[510px] leading-[1.75]">
-          Highlights pulled straight from our project README, the kind of details that make the system feel real.
-        </p>
       </div>
 
       <div className="grid md:grid-cols-3 gap-[13px]">
