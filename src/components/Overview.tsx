@@ -22,8 +22,9 @@ export default function Overview() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-[52px] items-start">
-        <div>
+      {/* Why this matters */}
+      <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-[36px] lg:gap-[52px] items-start">
+        <div className="min-w-0">
           <div className="space-y-[15px]">
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
               In today’s digital era, misinformation no longer relies on text and manipulated images alone. With AI-generated voices, fake content becomes far more persuasive — especially for older generations who see voice notes as a personal “digital handshake.”
@@ -31,45 +32,6 @@ export default function Overview() {
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
               We quantified this with a Lebaran-season blind listening “Simple Quiz” (57 respondents; 89.3% Boomers/older adults): on two deepfake clips, <strong className="text-white/[0.72] font-medium">nearly 90% were fooled</strong>, and on a real human clip <strong className="text-white/[0.72] font-medium">~20% flagged it as AI</strong>.
             </p>
-
-            {/* Listening quiz snapshots */}
-            <div className="border border-bd rounded-xl overflow-hidden bg-surf">
-              <div className="relative p-3 md:p-4 bg-[#0d0d0d]">
-                <span className="absolute top-4 left-4 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.07)] border border-[rgba(185,154,46,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
-                  Quiz results
-                </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-6">
-                  <img
-                    src="/figures/figure0_age_distribution.jpeg"
-                    alt="Age distribution of listening quiz respondents (57 responses)"
-                    className="w-full h-auto block rounded-lg border border-bd bg-[#0a0a0a]"
-                    loading="lazy"
-                  />
-                  <img
-                    src="/figures/figure0_audio01_results.jpeg"
-                    alt="Quiz results for AUDIO01: respondents selecting Human vs Deepfake voice"
-                    className="w-full h-auto block rounded-lg border border-bd bg-[#0a0a0a]"
-                    loading="lazy"
-                  />
-                  <img
-                    src="/figures/figure0_audio03_results.jpeg"
-                    alt="Quiz results for AUDIO03: respondents selecting Human vs Deepfake voice"
-                    className="w-full h-auto block rounded-lg border border-bd bg-[#0a0a0a]"
-                    loading="lazy"
-                  />
-                  <img
-                    src="/figures/figure0_audio02_results.jpeg"
-                    alt="Quiz results for AUDIO02: respondents selecting Human vs Deepfake voice"
-                    className="w-full h-auto block rounded-lg border border-bd bg-[#0a0a0a]"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-              <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
-                Listening quiz snapshots — age distribution and how often respondents mistook AI voice for real (and vice versa)
-              </p>
-            </div>
-
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
               That reversal is the <strong className="text-white/[0.72] font-medium">Liar’s Dividend</strong>: deepfakes don’t just make lies believable — they make truth suspicious. This is why an automated, explainable detector isn’t just useful; it’s necessary.
             </p>
@@ -97,24 +59,90 @@ export default function Overview() {
           </div>
         </div>
 
-        <div>
-          <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase mb-[14px] block">
+        {/* Quiz images — optimized UX (scroll on mobile, 2x2 on desktop) */}
+        <div className="border border-bd rounded-2xl overflow-hidden bg-surf">
+          <div className="relative p-3 md:p-4 bg-[#0d0d0d]">
+            <span className="absolute top-4 left-4 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.07)] border border-[rgba(185,154,46,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
+              Quiz results
+            </span>
+
+            {/* Mobile: horizontal scroll-snap cards */}
+            <div className="pt-6 flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:hidden scroll-px-3">
+              {[
+                { src: '/figures/figure0_age_distribution.jpeg', label: 'Respondent age', alt: 'Age distribution of listening quiz respondents (57 responses)' },
+                { src: '/figures/figure0_audio01_results.jpeg', label: 'AUDIO01', alt: 'Quiz results for AUDIO01: respondents selecting Human vs Deepfake voice' },
+                { src: '/figures/figure0_audio02_results.jpeg', label: 'AUDIO02', alt: 'Quiz results for AUDIO02: respondents selecting Human vs Deepfake voice' },
+                { src: '/figures/figure0_audio03_results.jpeg', label: 'AUDIO03', alt: 'Quiz results for AUDIO03: respondents selecting Human vs Deepfake voice' },
+              ].map((img) => (
+                <a
+                  key={img.label}
+                  href={img.src}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="relative snap-start shrink-0 w-[82%] sm:w-[58%] border border-bd rounded-xl overflow-hidden bg-[#0a0a0a] hover:border-[rgba(185,154,46,0.22)] transition-colors"
+                  title="Open full image"
+                >
+                  <span className="absolute top-2 left-2 z-10 font-mono-c text-[9px] tracking-widest uppercase bg-black/55 border border-white/10 text-white/80 px-2 py-0.5 rounded">
+                    {img.label}
+                  </span>
+                  <img src={img.src} alt={img.alt} className="w-full h-auto block" loading="lazy" />
+                </a>
+              ))}
+            </div>
+
+            {/* Desktop: clean 2×2 grid */}
+            <div className="hidden lg:grid grid-cols-2 gap-3 pt-6">
+              {[
+                { src: '/figures/figure0_age_distribution.jpeg', label: 'Respondent age', alt: 'Age distribution of listening quiz respondents (57 responses)' },
+                { src: '/figures/figure0_audio01_results.jpeg', label: 'AUDIO01', alt: 'Quiz results for AUDIO01: respondents selecting Human vs Deepfake voice' },
+                { src: '/figures/figure0_audio02_results.jpeg', label: 'AUDIO02', alt: 'Quiz results for AUDIO02: respondents selecting Human vs Deepfake voice' },
+                { src: '/figures/figure0_audio03_results.jpeg', label: 'AUDIO03', alt: 'Quiz results for AUDIO03: respondents selecting Human vs Deepfake voice' },
+              ].map((img) => (
+                <a
+                  key={img.label}
+                  href={img.src}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="relative border border-bd rounded-xl overflow-hidden bg-[#0a0a0a] hover:border-[rgba(185,154,46,0.22)] transition-colors"
+                  title="Open full image"
+                >
+                  <span className="absolute top-2 left-2 z-10 font-mono-c text-[9px] tracking-widest uppercase bg-black/55 border border-white/10 text-white/80 px-2 py-0.5 rounded">
+                    {img.label}
+                  </span>
+                  <img src={img.src} alt={img.alt} className="w-full h-auto block" loading="lazy" />
+                </a>
+              ))}
+            </div>
+          </div>
+          <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
+            Listening quiz snapshots — swipe on mobile, click to open full-size charts.
+          </p>
+        </div>
+      </div>
+
+      {/* Separate Project Goals section */}
+      <div className="mt-16 pt-10 border-t border-bd">
+        <div className="mb-[18px]">
+          <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase mb-2 block">
             Project Goals
           </span>
-          <div className="flex flex-col gap-[3px]">
-            {goals.map((g) => (
-              <div
-                key={g.n}
-                className="border border-bd rounded-[10px] p-4 flex gap-[14px] transition-all duration-200 hover:border-[rgba(185,154,46,0.18)] hover:bg-[rgba(185,154,46,0.07)] cursor-default"
-              >
-                <span className="font-mono-c text-[11px] text-y min-w-[18px] pt-0.5 flex-shrink-0">{g.n}</span>
-                <div>
-                  <div className="text-[14px] font-medium text-white mb-1">{g.title}</div>
-                  <div className="text-[13px] text-mt font-light leading-[1.6]">{g.desc}</div>
-                </div>
+          <p className="text-[14px] text-white/40 font-light leading-[1.8] max-w-[680px]">
+            What we set out to build — and the constraints we refused to compromise on.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-3">
+          {goals.map((g) => (
+            <div
+              key={g.n}
+              className="border border-bd rounded-[12px] p-4 flex gap-[14px] transition-all duration-200 hover:border-[rgba(185,154,46,0.18)] hover:bg-[rgba(185,154,46,0.07)] cursor-default"
+            >
+              <span className="font-mono-c text-[11px] text-y min-w-[18px] pt-0.5 flex-shrink-0">{g.n}</span>
+              <div>
+                <div className="text-[14px] font-medium text-white mb-1">{g.title}</div>
+                <div className="text-[13px] text-mt font-light leading-[1.65]">{g.desc}</div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
