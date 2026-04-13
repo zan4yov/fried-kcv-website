@@ -17,8 +17,8 @@ export default function Overview() {
           Why this project<br />
           <em className="not-italic text-white/20 font-normal">matters.</em>
         </h2>
-        <p className="mt-3 text-[15px] text-white/40 font-light max-w-[510px] leading-[1.75]">
-          A video appears in a family WhatsApp group, disaster, crisis, a shocking event, and a calm voice explains what’s happening. It sounds convincing. It sounds real. Within minutes, it spreads.
+        <p className="mt-3 text-[15px] text-white/40 font-light max-w-[680px] leading-[1.75]">
+          A video appears in a family WhatsApp group, showing a disaster, crisis, or shocking event. A calm voice explains what is happening. It sounds convincing. It sounds real. Within minutes, the message spreads.
         </p>
       </div>
 
@@ -27,16 +27,16 @@ export default function Overview() {
         <div className="min-w-0">
           <div className="space-y-[15px]">
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              In today’s digital era, misinformation no longer relies on text and manipulated images alone. With AI-generated voices, fake content becomes far more persuasive, especially for older generations who see voice notes as a personal “digital handshake.”
+              In today’s digital era, misinformation no longer relies only on text or manipulated images. With AI-generated voices, fake content becomes far more persuasive, especially for older generations who often perceive voice notes as a personal “digital handshake.”
             </p>
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              We quantified this with a Lebaran-season blind listening “Simple Quiz” (57 respondents; 89.3% Boomers/older adults): on two deepfake clips, <strong className="text-white/[0.72] font-medium">nearly 90% were fooled</strong>, and on a real human clip <strong className="text-white/[0.72] font-medium">~20% flagged it as AI</strong>.
+              We observed this phenomenon through a Lebaran-season blind listening Simple Quiz involving 57 respondents, where 89.3% were Boomers or older adults. When presented with two deepfake audio clips, nearly 90% of participants believed they were real. Surprisingly, when listening to a genuine human recording, around 20% suspected it was AI-generated.
             </p>
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              That reversal is the <strong className="text-white/[0.72] font-medium">Liar’s Dividend</strong>: deepfakes don’t just make lies believable, they make truth suspicious. This is why an automated, explainable detector isn’t just useful, it’s necessary.
+              This reversal reflects what is known as the Liar’s Dividend: deepfakes do not only make false information believable, they also make real information appear suspicious. As a result, detecting synthetic audio becomes increasingly important.
             </p>
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              <strong className="text-white/[0.72] font-medium">Fake67</strong> turns raw audio into a prediction plus a human-readable explanation: DSP converts waveform → spectrogram, EfficientNet-B4 classifies bonafide vs spoof, Grad-CAM highlights influential regions, and an LLM (Qwen 2.5) narrates the evidence in plain language.
+              To address this challenge, Fake67 transforms raw audio into both a prediction and a human-readable explanation. The system first converts waveform audio into a spectrogram using Digital Signal Processing (DSP). The spectrogram is then analyzed by EfficientNet-B4 to classify the audio as bonafide or spoof. Grad-CAM highlights the most influential regions of the spectrogram, and finally an LLM, Qwen 2.5, generates a clear explanation of the evidence in plain language.
             </p>
           </div>
 
