@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 import { IconMic } from './icons/IconMic'
 import { IconWaveSignal } from './icons/IconWaveSignal'
 import { IconBrain } from './icons/IconBrain'
@@ -35,7 +35,22 @@ const techStack = [
   { label: 'Dataset', chips: [{ name: 'FoR for-2sec', y: true }, { name: 'Fake-or-Real (FoR)', y: false }, { name: 'Kaggle', y: false }] },
 ]
 
+const FIG3_MSG = 'fried-figure3-size'
+
 export default function Architecture() {
+  const fig3FrameRef = useRef<HTMLIFrameElement>(null)
+
+  useEffect(() => {
+    const onMsg = (e: MessageEvent) => {
+      if (e.data?.type !== FIG3_MSG || typeof e.data.height !== 'number') return
+      const el = fig3FrameRef.current
+      if (!el) return
+      el.style.height = `${Math.ceil(e.data.height)}px`
+    }
+    window.addEventListener('message', onMsg)
+    return () => window.removeEventListener('message', onMsg)
+  }, [])
+
   return (
     <div id="architecture" className="bg-surf border-t border-b border-bd py-20 px-8">
       <div className="max-w-page mx-auto">
@@ -144,9 +159,10 @@ export default function Architecture() {
                   Fig. 3
                 </span>
                 <iframe
+                  ref={fig3FrameRef}
                   title="Figure 3 — Mel spectrogram comparison: genuine vs AI-generated TTS"
                   src="/figures/figure3_mel_spectrogram_comparison.html"
-                  className="w-full min-h-[420px] border-0 block"
+                  className="w-full min-h-[320px] border-0 block"
                   sandbox="allow-scripts allow-same-origin"
                   loading="lazy"
                 />
