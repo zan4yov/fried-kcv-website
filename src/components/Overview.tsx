@@ -31,6 +31,45 @@ export default function Overview() {
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
               We quantified this with a Lebaran-season blind listening “Simple Quiz” (57 respondents; 89.3% Boomers/older adults): on two deepfake clips, <strong className="text-white/[0.72] font-medium">nearly 90% were fooled</strong>, and on a real human clip <strong className="text-white/[0.72] font-medium">~20% flagged it as AI</strong>.
             </p>
+
+            {/* Listening quiz snapshots */}
+            <div className="border border-bd rounded-xl overflow-hidden bg-surf">
+              <div className="relative p-3 md:p-4 bg-[#0d0d0d]">
+                <span className="absolute top-4 left-4 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.07)] border border-[rgba(185,154,46,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
+                  Quiz results
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-6">
+                  <img
+                    src="/figures/figure0_age_distribution.jpeg"
+                    alt="Age distribution of listening quiz respondents (57 responses)"
+                    className="w-full h-auto block rounded-lg border border-bd bg-[#0a0a0a]"
+                    loading="lazy"
+                  />
+                  <img
+                    src="/figures/figure0_audio01_results.jpeg"
+                    alt="Quiz results for AUDIO01: respondents selecting Human vs Deepfake voice"
+                    className="w-full h-auto block rounded-lg border border-bd bg-[#0a0a0a]"
+                    loading="lazy"
+                  />
+                  <img
+                    src="/figures/figure0_audio03_results.jpeg"
+                    alt="Quiz results for AUDIO03: respondents selecting Human vs Deepfake voice"
+                    className="w-full h-auto block rounded-lg border border-bd bg-[#0a0a0a]"
+                    loading="lazy"
+                  />
+                  <img
+                    src="/figures/figure0_audio02_results.jpeg"
+                    alt="Quiz results for AUDIO02: respondents selecting Human vs Deepfake voice"
+                    className="w-full h-auto block rounded-lg border border-bd bg-[#0a0a0a]"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
+                Listening quiz snapshots — age distribution and how often respondents mistook AI voice for real (and vice versa)
+              </p>
+            </div>
+
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
               That reversal is the <strong className="text-white/[0.72] font-medium">Liar’s Dividend</strong>: deepfakes don’t just make lies believable — they make truth suspicious. This is why an automated, explainable detector isn’t just useful; it’s necessary.
             </p>
