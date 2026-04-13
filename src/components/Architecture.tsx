@@ -18,7 +18,7 @@ const PIPELINE_TO_LAYER_TAG: Record<string, string> = {
 }
 
 const pipelineItems: PipelineItem[] = [
-  { type: 'node', icon: <IconMic />,        label: 'Audio input',        sub: 'WAV / FLAC',                    active: false },
+  { type: 'node', icon: <IconMic />,        label: 'Audio input',        sub: 'User mengupload audio WAV/FLAC', active: false },
   { type: 'arrow' },
   { type: 'node', icon: <IconWaveSignal />, label: 'Stage 1 · Audio DSP', sub: 'STFT · Mel · 224²',            active: false },
   { type: 'arrow' },
@@ -113,6 +113,7 @@ export default function Architecture() {
                 const isMapped = Boolean(mappedTag)
                 const isActive = selectedLayerTag ? mappedTag === selectedLayerTag : false
                 const isSubYellow = selectedLayerTag ? isActive : false
+                const isAudioInput = item.label === 'Audio input'
 
                 return (
               <div
@@ -133,7 +134,9 @@ export default function Architecture() {
                       }
                     : undefined
                 }
-                className={`border rounded-[10px] px-2.5 py-3.5 text-center min-w-[118px] max-w-[140px] md:min-w-[128px] md:max-w-none bg-bg ${
+                className={`border rounded-[10px] px-2.5 py-3.5 text-center min-w-[118px] ${
+                  isAudioInput ? 'max-w-[min(280px,92vw)]' : 'max-w-[140px]'
+                } md:min-w-[128px] md:max-w-none bg-bg ${
                   isMapped ? 'cursor-pointer select-none' : 'cursor-default'
                 } transition-all hover:border-[rgba(185,154,46,0.22)] hover:bg-[rgba(185,154,46,0.08)] hover:-translate-y-[3px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(185,154,46,0.35)] focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(10,10,10,0.0)] ${
                   isActive
