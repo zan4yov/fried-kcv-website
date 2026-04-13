@@ -16,7 +16,7 @@ const pipelineItems: PipelineItem[] = [
   { type: 'arrow' },
   { type: 'node', icon: <IconBrain />,      label: 'Stage 2 · CV inference', sub: 'EfficientNet-B4 · ONNX',   active: true, subYellow: true },
   { type: 'arrow' },
-  { type: 'node', icon: <IconLineChart />,  label: 'Stage 3 · Grad-CAM',   sub: 'XAI · 4-band Mel',            active: false },
+  { type: 'node', icon: <IconLineChart />, label: 'Stage 3 · Grad-CAM',   sub: 'XAI · 4-band Mel',            active: false },
   { type: 'arrow' },
   { type: 'node', icon: <IconRobot />,      label: 'Stage 4 · NLP',      sub: 'Qwen · Gemma · rules',        active: false },
 ]
@@ -137,26 +137,22 @@ export default function Architecture() {
               ))}
             </div>
 
-            {/* Figure 3 */}
+            {/* Figure 3 — interactive Mel comparison (canvas) */}
             <div className="border border-bd rounded-xl overflow-hidden bg-surf mt-5">
-              <div
-                className="flex items-center justify-center flex-col gap-2 p-6 relative min-h-[150px]"
-                style={{
-                  backgroundImage:
-                    'repeating-linear-gradient(45deg,rgba(185,154,46,.03) 0,rgba(185,154,46,.03) 1px,transparent 1px,transparent 12px),repeating-linear-gradient(-45deg,rgba(185,154,46,.03) 0,rgba(185,154,46,.03) 1px,transparent 1px,transparent 12px)',
-                }}
-              >
-                <span className="absolute top-3 left-3 font-mono-c text-[9px] bg-[rgba(185,154,46,0.1)] border border-[rgba(185,154,46,0.22)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
+              <div className="relative bg-[#0a0a0a]">
+                <span className="absolute top-3 left-3 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.1)] border border-[rgba(185,154,46,0.22)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
                   Fig. 3
                 </span>
-                <IconLineChart size={28} />
-                <p className="font-mono-c text-[10px] tracking-widest text-mt2 text-center relative z-10 uppercase">
-                  Mel-Spectrogram Comparison
-                  <small className="block mt-0.5 text-[9px] text-[#2e2e2e]">Replace with genuine vs. synthetic spectrogram from your article</small>
-                </p>
+                <iframe
+                  title="Figure 3 — Mel spectrogram comparison: genuine vs AI-generated TTS"
+                  src="/figures/figure3_mel_spectrogram_comparison.html"
+                  className="w-full min-h-[420px] border-0 block"
+                  sandbox="allow-scripts allow-same-origin"
+                  loading="lazy"
+                />
               </div>
               <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
-                Figure 3 — Genuine vs. synthetic speech spectrograms showing synthesis artifacts
+                Figure 3 — Genuine vs. synthetic Mel spectrograms with band attribution and Grad-CAM-style highlight (2–4 kHz artifact zone)
               </p>
             </div>
           </div>
