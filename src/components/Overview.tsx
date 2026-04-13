@@ -18,7 +18,7 @@ export default function Overview() {
           <em className="not-italic text-white/20 font-normal">matters.</em>
         </h2>
         <p className="mt-3 text-[15px] text-white/40 font-light max-w-[510px] leading-[1.75]">
-          In Indonesia’s family WhatsApp groups, a voice note can sound real — then get forwarded thousands of times. Sometimes the voice was never human.
+          A video appears in a family WhatsApp group — disaster, crisis, a shocking event — and a calm voice explains what’s happening. It sounds convincing. It sounds real. Within minutes, it spreads.
         </p>
       </div>
 
@@ -26,16 +26,16 @@ export default function Overview() {
         <div>
           <div className="space-y-[15px]">
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              We ran a small blind listening experiment during Lebaran 2026 (57 respondents; 89.3% older adults). The outcome was unsettling: <strong className="text-white/[0.72] font-medium">~90% were fooled</strong> by AI-generated voices, and <strong className="text-white/[0.72] font-medium">~20% mis-flagged a real human voice</strong> as AI.
+              In today’s digital era, misinformation no longer relies on text and manipulated images alone. With AI-generated voices, fake content becomes far more persuasive — especially for older generations who see voice notes as a personal “digital handshake.”
             </p>
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              This is the <strong className="text-white/[0.72] font-medium">Liar’s Dividend</strong>: deepfakes don’t just make lies believable — they also make truth suspicious. For any system that trusts voice, that’s an existential problem.
+              We quantified this with a Lebaran-season blind listening “Simple Quiz” (57 respondents; 89.3% Boomers/older adults): on two deepfake clips, <strong className="text-white/[0.72] font-medium">nearly 90% were fooled</strong>, and on a real human clip <strong className="text-white/[0.72] font-medium">~20% flagged it as AI</strong>.
             </p>
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              <strong className="text-white/[0.72] font-medium">Fake67</strong> is our response: an automated, explainable pipeline that goes beyond a yes/no verdict and shows <em>why</em> it reached the conclusion — deployed as Gradio on Hugging Face Spaces.
+              That reversal is the <strong className="text-white/[0.72] font-medium">Liar’s Dividend</strong>: deepfakes don’t just make lies believable — they make truth suspicious. This is why an automated, explainable detector isn’t just useful; it’s necessary.
             </p>
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              The core insight: synthetic voices leave <strong className="text-white/[0.72] font-medium">spectral artifacts</strong> (often around 2–4 kHz) that are easy to miss by ear but consistent enough to detect with Mel spectrograms + EfficientNet-B4, and to justify with Grad-CAM and band attribution.
+              <strong className="text-white/[0.72] font-medium">Fake67</strong> turns raw audio into a prediction plus a human-readable explanation: DSP converts waveform → spectrogram, EfficientNet-B4 classifies bonafide vs spoof, Grad-CAM highlights influential regions, and an LLM (Qwen 2.5) narrates the evidence in plain language.
             </p>
           </div>
 

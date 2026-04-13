@@ -8,12 +8,12 @@ import { IconFace } from './icons/IconFace'
 interface Fact { icon: ReactNode; title: string; text: string }
 
 const facts: Fact[] = [
-  { icon: <IconFace size={18} />,      title: 'Humans get fooled',            text: 'In our Lebaran 2026 blind listening run (57 respondents), ~90% were fooled by AI-generated clips — and ~20% even flagged a real human voice as AI. The “Liar’s Dividend” is real.' },
-  { icon: <IconDna size={18} />,       title: 'EfficientNet-B4 is 1792-d',    text: 'Before the two-logit head (bonafide/spoof), EfficientNet-B4 produces a 1792-d embedding — expressive enough for spectrogram artifacts, still deployable with ONNX Runtime on CPU.' },
-  { icon: <IconHistogram size={18} />, title: 'Threshold = 0.93 (EER-tuned)', text: 'We use sigmoid(logit₁) as a spoof score in [0,1], with a decision threshold 0.93 tuned to align FAR≈FRR (EER) on the FoR for-2sec split.' },
-  { icon: <IconMusicNote size={18} />, title: '2–4 kHz is the artifact zone', text: 'Band attribution highlights a recurring high-mid region (2–4 kHz): vocal texture where many TTS systems leave consistent spectral traces.' },
-  { icon: <IconBolt size={18} />,      title: 'CPU-only demo target: <15s',   text: 'The full run (DSP → ONNX inference → Grad-CAM → NLP explanation) is designed to complete under ~15 seconds on CPU-only Hugging Face Spaces.' },
-  { icon: <IconRobot size={18} />,     title: 'The app always explains',      text: 'Stage 4 uses a 3-layer fallback (Qwen → Gemma → rule-based). Even if HF API calls timeout, users still receive a readable 3–5 sentence “why”.' },
+  { icon: <IconFace size={18} />,      title: 'The “truth gap” is measurable', text: 'Lebaran blind listening quiz (57 respondents; 89.3% older adults): on deepfakes 1 & 3, nearly 90% were fooled; on the real clip, ~20% flagged it as AI. That reversal is the Liar’s Dividend.' },
+  { icon: <IconMusicNote size={18} />, title: 'Why “for-2sec” matters',        text: 'We used FoR for-2sec for uniform preprocessing, consistent Mel spectrogram dimensions, and a realistic baseline that matches short WhatsApp voice-note style audio.' },
+  { icon: <IconHistogram size={18} />, title: 'AUC ≠ decision boundary',       text: 'A strong AUC-ROC doesn’t guarantee good threshold decisions. We had to sweep thresholds, identify operating points (~0.969 / ~0.967), then finalize decision_threshold = 0.93 for stable balanced decisions (~0.86 accuracy, ~0.86 F1).' },
+  { icon: <IconDna size={18} />,       title: 'EfficientNet-B4 + Grad-CAM',    text: 'Treating spectrograms like images lets EfficientNet-B4 capture subtle visual-like audio patterns. Grad-CAM then highlights which time–frequency regions drove the verdict, addressing the black-box problem.' },
+  { icon: <IconBolt size={18} />,      title: 'Saved twice: .pth + ONNX',      text: 'We export the best weights (`best_model.pth`) and also convert to ONNX for faster, more portable inference — a key step to move from notebook experiments to deployment.' },
+  { icon: <IconRobot size={18} />,     title: 'Three-level explanation fallback', text: 'Stage 4 uses Qwen 2.5 with timeout, then Gemma 2B, then a local rule-based explainer that always returns a four-sentence explanation (prediction, confidence, dominant band, interpretation).' },
 ]
 
 export default function Facts() {
