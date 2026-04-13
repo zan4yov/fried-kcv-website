@@ -10,6 +10,7 @@ type PipelineItem =
   | { type: 'arrow' }
 
 const PIPELINE_TO_LAYER_TAG: Record<string, string> = {
+  'Audio input': 'Stage 1 · Audio DSP',
   'Stage 1 · Audio DSP': 'Stage 1 · Audio DSP',
   'Stage 2 · CV inference': 'Stage 2 · CV inference',
   'Stage 3 · Grad-CAM': 'Stage 3 · Grad-CAM (XAI)',
