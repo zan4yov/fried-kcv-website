@@ -182,14 +182,14 @@ export default function Architecture() {
               Fig. 2
             </span>
             <img
-              src="/figures/figure2_efficientnet_architecture.svg"
-              alt="Figure 2 — EfficientNet-B4 architecture for spectrogram-based deepfake detection"
-              className="w-full h-auto block rounded-lg"
+              src="/figures/figure2_system_pipeline.jpeg"
+              alt="Figure 2 — End-to-end system pipeline: audio DSP to CV inference, Grad-CAM, and NLP explanation"
+              className="w-full h-auto block rounded-lg border border-bd bg-[#0a0a0a] object-contain max-h-[540px] md:max-h-[640px]"
               loading="lazy"
             />
           </div>
           <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
-            Figure 2 — EfficientNet-B4 backbone and classifier head (ONNX inference path)
+            Figure 2 — End-to-end pipeline from WAV input → Mel spectrogram → EfficientNet inference → Grad-CAM & band attribution → LLM explanation
           </p>
         </div>
 
