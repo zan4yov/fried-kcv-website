@@ -66,13 +66,7 @@ export default function Architecture() {
       if (e.key === 'Escape') setSelectedLayerTag(null)
     }
     document.addEventListener('keydown', onKeyDown)
-    // prevent background scroll while modal open
-    const prevOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKeyDown)
-      document.body.style.overflow = prevOverflow
-    }
+    return () => document.removeEventListener('keydown', onKeyDown)
   }, [selectedLayerTag])
 
   useEffect(() => {
@@ -88,52 +82,6 @@ export default function Architecture() {
 
   return (
     <div id="architecture" className="bg-surf border-t border-b border-bd py-20 px-8">
-      {/* Stage details modal */}
-      {selectedLayer && (
-        <div
-          className="fixed inset-0 z-[80] flex items-center justify-center px-4 py-6"
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${selectedLayer.tag} details`}
-        >
-          <button
-            type="button"
-            aria-label="Close stage details"
-            className="absolute inset-0 bg-black/70"
-            onClick={() => setSelectedLayerTag(null)}
-          />
-          <div className="relative w-full max-w-[720px] border border-[rgba(185,154,46,0.22)] bg-[#0b0b0b] rounded-2xl shadow-[0_30px_90px_rgba(0,0,0,0.65)] overflow-hidden">
-            <div className="p-5 md:p-6 border-b border-bd bg-[radial-gradient(1200px_500px_at_10%_-10%,rgba(185,154,46,0.12),transparent_60%),radial-gradient(900px_420px_at_90%_0%,rgba(185,154,46,0.08),transparent_55%)]">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <div className="font-mono-c text-[10px] tracking-[0.16em] uppercase text-y mb-2">
-                    {selectedLayer.tag}
-                  </div>
-                  <div className="text-[18px] md:text-[20px] font-semibold text-white leading-snug">
-                    {selectedLayer.name}
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setSelectedLayerTag(null)}
-                  className="shrink-0 font-mono-c text-[10px] tracking-[0.16em] uppercase text-mt2 hover:text-y transition-colors border border-bd hover:border-[rgba(185,154,46,0.22)] rounded-md px-2.5 py-1.5 bg-bg"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-            <div className="p-5 md:p-6">
-              <div className="text-[14px] text-mt font-light leading-[1.75]">
-                {selectedLayer.desc}
-              </div>
-              <div className="mt-4 text-[11px] text-white/35 font-mono-c tracking-[0.12em] uppercase">
-                Tip: press Esc to close
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       <div className="max-w-page mx-auto">
         <div className="mb-[46px] rv">
           <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase mb-3 block">
@@ -188,6 +136,43 @@ export default function Architecture() {
               </div>
             )
           )}
+        </div>
+
+        {/* Inline stage explanation bar (updates on tap) */}
+        <div className="rv -mt-2 mb-[38px]">
+          <div
+            className={`border rounded-2xl overflow-hidden transition-all duration-200 ${
+              selectedLayer ? 'border-[rgba(185,154,46,0.22)] bg-[rgba(185,154,46,0.06)]' : 'border-bd bg-bg/40'
+            }`}
+          >
+            <div className="px-5 md:px-6 py-4 md:py-5 flex items-start justify-between gap-4">
+              <div className="min-w-0">
+                <div className="font-mono-c text-[10px] tracking-[0.16em] uppercase text-mt2">
+                  {selectedLayer ? selectedLayer.tag : 'Tap a stage to see the explanation'}
+                </div>
+                <div className="mt-1 text-[15px] md:text-[16px] font-medium text-white/80 leading-snug">
+                  {selectedLayer ? selectedLayer.name : 'Audio DSP → CV inference → Grad-CAM → NLP'}
+                </div>
+                <div className="mt-2 text-[13px] text-mt font-light leading-[1.75]">
+                  {selectedLayer
+                    ? selectedLayer.desc
+                    : 'Select Audio input or Stage 1–4 in the pipeline above. Press Esc or use Clear to reset.'}
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedLayerTag(null)}
+                className={`shrink-0 font-mono-c text-[10px] tracking-[0.16em] uppercase transition-colors border rounded-md px-2.5 py-1.5 ${
+                  selectedLayer
+                    ? 'text-mt2 hover:text-y border-bd hover:border-[rgba(185,154,46,0.22)] bg-bg'
+                    : 'text-white/25 border-bd/60 bg-transparent cursor-default'
+                }`}
+                disabled={!selectedLayer}
+              >
+                Clear
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Figure 2 */}
