@@ -6,6 +6,33 @@ const goals = [
   { n: '05', title: 'Stay honest on limitations',           desc: 'Document codec quirks, HF rate limits, and the Liar’s Dividend findings from our blind listening study so the UI reads as research-grade, not magic.' },
 ]
 
+const quizFigures = [
+  {
+    src: '/figures/figure0_age_distribution.jpeg',
+    label: 'Respondent age',
+    alt: 'Age distribution of listening quiz respondents (57 responses)',
+    caption: 'Age distribution (57 responses), majority over 40',
+  },
+  {
+    src: '/figures/figure0_audio01_results.jpeg',
+    label: 'AUDIO01',
+    alt: 'Quiz results for AUDIO01: 82.5% human vs 17.5% deepfake',
+    caption: 'AUDIO01 (AI clip): 82.5% labeled as human voice',
+  },
+  {
+    src: '/figures/figure0_audio02_results.jpeg',
+    label: 'AUDIO02',
+    alt: 'Quiz results for AUDIO02: 80.7% human vs 19.3% deepfake',
+    caption: 'AUDIO02 (real clip): 19.3% still labeled as deepfake',
+  },
+  {
+    src: '/figures/figure0_audio03_results.jpeg',
+    label: 'AUDIO03',
+    alt: 'Quiz results for AUDIO03: 87.7% human vs 12.3% deepfake',
+    caption: 'AUDIO03 (AI clip): 87.7% labeled as human voice',
+  },
+]
+
 export default function Overview() {
   return (
     <section id="overview" className="rv px-8 py-20 max-w-page mx-auto">
@@ -17,85 +44,39 @@ export default function Overview() {
           Why this project<br />
           <em className="not-italic text-white/20 font-normal">matters.</em>
         </h2>
-        <p className="mt-3 text-[15px] text-white/40 font-light max-w-[680px] leading-[1.75]">
+        <p className="mt-3 text-[15px] text-white/40 font-light max-w-[720px] leading-[1.75]">
           A video appears in a family WhatsApp group, showing a disaster, crisis, or shocking event. A calm voice explains what is happening. It sounds convincing. It sounds real. Within minutes, the message spreads.
         </p>
       </div>
 
-      {/* Why this matters */}
-      <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-[36px] lg:gap-[52px] items-start">
-        <div className="min-w-0">
-          <div className="space-y-[15px]">
-            <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              In today’s digital era, misinformation no longer relies only on text or manipulated images. With AI-generated voices, fake content becomes far more persuasive, especially for older generations who often perceive voice notes as a personal “digital handshake.”
-            </p>
-            <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              We observed this phenomenon through a Lebaran-season blind listening Simple Quiz involving 57 respondents, where 89.3% were Boomers or older adults. When presented with two deepfake audio clips, nearly 90% of participants believed they were real. Surprisingly, when listening to a genuine human recording, around 20% suspected it was AI-generated.
-            </p>
-            <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              This reversal reflects what is known as the Liar’s Dividend: deepfakes do not only make false information believable, they also make real information appear suspicious. As a result, detecting synthetic audio becomes increasingly important.
-            </p>
-            <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              To address this challenge, Fake67 transforms raw audio into both a prediction and a human-readable explanation. The system first converts waveform audio into a spectrogram using Digital Signal Processing (DSP). The spectrogram is then analyzed by EfficientNet-B4 to classify the audio as bonafide or spoof. Grad-CAM highlights the most influential regions of the spectrogram, and finally an LLM, Qwen 2.5, generates a clear explanation of the evidence in plain language.
-            </p>
-          </div>
+      {/* Narrative: aligns with the quiz charts below */}
+      <div className="max-w-[720px] space-y-[15px] mb-10">
+        <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
+          In today’s digital era, misinformation no longer relies only on text or manipulated images. With AI-generated voices, fake content becomes far more persuasive, especially for older generations who often perceive voice notes as a personal “digital handshake.”
+        </p>
+        <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
+          We captured this with a Lebaran-season blind listening Simple Quiz (57 responses), shown in the charts. The respondent pool skewed older: <strong className="text-white/[0.72] font-medium">87.7%</strong> were over 40. On two AI-generated clips, most listeners still chose “human voice”: <strong className="text-white/[0.72] font-medium">AUDIO01</strong> split <strong className="text-white/[0.72] font-medium">82.5%</strong> vs <strong className="text-white/[0.72] font-medium">17.5%</strong>, and <strong className="text-white/[0.72] font-medium">AUDIO03</strong> split <strong className="text-white/[0.72] font-medium">87.7%</strong> vs <strong className="text-white/[0.72] font-medium">12.3%</strong> (human vs deepfake). On the genuine clip, <strong className="text-white/[0.72] font-medium">AUDIO02</strong>, the chart reads <strong className="text-white/[0.72] font-medium">80.7%</strong> vs <strong className="text-white/[0.72] font-medium">19.3%</strong>, so nearly one in five listeners suspected real speech of being synthetic.
+        </p>
+        <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
+          This reversal reflects what is known as the Liar’s Dividend: deepfakes do not only make false information believable, they also make real information appear suspicious. As a result, detecting synthetic audio becomes increasingly important.
+        </p>
+        <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
+          To address this challenge, Fake67 transforms raw audio into both a prediction and a human-readable explanation. The system first converts waveform audio into a spectrogram using Digital Signal Processing (DSP). The spectrogram is then analyzed by EfficientNet-B4 to classify the audio as bonafide or spoof. Grad-CAM highlights the most influential regions of the spectrogram, and finally an LLM, Qwen 2.5, generates a clear explanation of the evidence in plain language.
+        </p>
+      </div>
 
-          {/* Figure 1 */}
-          <div className="border border-bd rounded-xl overflow-hidden bg-surf mt-6 rv">
-            <div className="relative p-3 md:p-4 bg-[#0d0d0d]">
-              <span className="absolute top-4 left-4 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.07)] border border-[rgba(185,154,46,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
-                Fig. 1
-              </span>
-              <img
-                src="/figures/figure1_system_overview.svg"
-                alt="Figure 1, Fake67 four-stage detection pipeline: WAV/FLAC through Audio DSP, CV inference, Grad-CAM, and NLP explanation"
-                className="w-full h-auto block rounded-lg"
-                loading="lazy"
-              />
-            </div>
-            <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
-              Figure 1, Fake67 four-stage system overview (audio DSP → EfficientNet-B4 → Grad-CAM → NLP)
-            </p>
-          </div>
+      {/* Quiz results */}
+      <div className="mb-10">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+          <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase">
+            Quiz results
+          </span>
+          <span className="text-[12px] text-white/35 font-light">
+            Click any card to open the full-size chart
+          </span>
         </div>
-
-        {/* Quiz images, separated cards (bigger + clearer) */}
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase">
-              Quiz results
-            </span>
-            <span className="text-[12px] text-white/35 font-light">
-              Click to open full-size
-            </span>
-          </div>
-
-          {[
-            {
-              src: '/figures/figure0_age_distribution.jpeg',
-              label: 'Respondent age',
-              alt: 'Age distribution of listening quiz respondents (57 responses)',
-              caption: 'Age distribution (57 responses)',
-            },
-            {
-              src: '/figures/figure0_audio01_results.jpeg',
-              label: 'AUDIO01',
-              alt: 'Quiz results for AUDIO01: respondents selecting Human vs Deepfake voice',
-              caption: 'AUDIO01, perceived as Human vs Deepfake',
-            },
-            {
-              src: '/figures/figure0_audio02_results.jpeg',
-              label: 'AUDIO02',
-              alt: 'Quiz results for AUDIO02: respondents selecting Human vs Deepfake voice',
-              caption: 'AUDIO02, perceived as Human vs Deepfake',
-            },
-            {
-              src: '/figures/figure0_audio03_results.jpeg',
-              label: 'AUDIO03',
-              alt: 'Quiz results for AUDIO03: respondents selecting Human vs Deepfake voice',
-              caption: 'AUDIO03, perceived as Human vs Deepfake',
-            },
-          ].map((img) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {quizFigures.map((img) => (
             <a
               key={img.label}
               href={img.src}
@@ -121,6 +102,24 @@ export default function Overview() {
             </a>
           ))}
         </div>
+      </div>
+
+      {/* Figure 1, pipeline overview (replaces prior SVG) */}
+      <div className="border border-bd rounded-xl overflow-hidden bg-surf rv">
+        <div className="relative p-3 md:p-5 bg-[#f5f5f5]">
+          <span className="absolute top-4 left-4 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.12)] border border-[rgba(185,154,46,0.35)] text-[#5c4d12] px-2.5 py-0.5 rounded tracking-widest uppercase">
+            Fig. 1
+          </span>
+          <img
+            src="/figures/figure1_pipeline_overview.jpeg"
+            alt="Figure 1, Fake67 pipeline flowchart: WAV/FLAC input, Stage 1 Audio DSP, parallel Stage 2 CV inference and Stage 3 Grad-CAM XAI, Stage 4 NLP explanation with Qwen and fallbacks, Gradio output on Hugging Face Spaces"
+            className="w-full h-auto block rounded-lg border border-bd bg-white"
+            loading="lazy"
+          />
+        </div>
+        <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
+          Figure 1, end-to-end Fake67 pipeline from audio input through DSP, CV, XAI, and NLP to Gradio on Hugging Face Spaces
+        </p>
       </div>
 
       {/* Separate Project Goals section */}
