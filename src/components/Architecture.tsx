@@ -208,24 +208,13 @@ export default function Architecture() {
           </p>
         </div>
 
-        {/* Two-column: stages + tech stack */}
-        <div className="grid md:grid-cols-2 gap-8 rv">
-          <div>
-            <div className="border border-bd rounded-[12px] p-4 bg-[rgba(185,154,46,0.03)]">
-              <div className="font-mono-c text-[10px] tracking-[0.16em] uppercase text-mt2">
-                Tap a stage above
-              </div>
-              <div className="text-[13px] text-mt font-light leading-[1.65] mt-2">
-                The explanation will pop up instantly (no scrolling).
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase mb-[14px] block">
+        {/* Technology + Figure 3 */}
+        <div className="grid lg:grid-cols-2 gap-8 rv">
+          <div className="border border-bd rounded-2xl bg-bg/60 p-5 md:p-6">
+            <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase mb-4 block">
               Technology stack
             </span>
-            <div className="grid grid-cols-2 gap-8 md:gap-8 max-md:grid-cols-1 max-md:gap-[22px]">
+            <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1 max-md:gap-[22px]">
               {techStack.map((group) => (
                 <div key={group.label}>
                   <div className="font-mono-c text-[10px] tracking-[0.14em] text-mt2 uppercase mb-[11px]">
@@ -248,26 +237,26 @@ export default function Architecture() {
                 </div>
               ))}
             </div>
+          </div>
 
-            {/* Figure 3 — interactive Mel comparison (canvas) */}
-            <div className="border border-bd rounded-xl overflow-hidden bg-surf mt-5">
-              <div className="relative bg-[#0a0a0a]">
-                <span className="absolute top-3 left-3 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.1)] border border-[rgba(185,154,46,0.22)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
-                  Fig. 3
-                </span>
-                <iframe
-                  ref={fig3FrameRef}
-                  title="Figure 3 — Mel spectrogram comparison: genuine vs AI-generated TTS"
-                  src="/figures/figure3_mel_spectrogram_comparison.html"
-                  className="w-full min-h-[320px] border-0 block"
-                  sandbox="allow-scripts allow-same-origin"
-                  loading="lazy"
-                />
-              </div>
-              <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
-                Figure 3 — Genuine vs. synthetic Mel spectrograms with band attribution and Grad-CAM-style highlight (2–4 kHz artifact zone)
-              </p>
+          {/* Figure 3 — interactive Mel comparison (canvas) */}
+          <div className="border border-bd rounded-2xl overflow-hidden bg-surf">
+            <div className="relative bg-[#0a0a0a]">
+              <span className="absolute top-3 left-3 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.1)] border border-[rgba(185,154,46,0.22)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
+                Fig. 3
+              </span>
+              <iframe
+                ref={fig3FrameRef}
+                title="Figure 3 — Mel spectrogram comparison: genuine vs AI-generated TTS"
+                src="/figures/figure3_mel_spectrogram_comparison.html"
+                className="w-full min-h-[360px] md:min-h-[440px] border-0 block"
+                sandbox="allow-scripts allow-same-origin"
+                loading="lazy"
+              />
             </div>
+            <p className="text-xs text-mt px-4 py-3 border-t border-bd italic text-center">
+              Figure 3 — Genuine vs. synthetic Mel spectrograms with band attribution and Grad-CAM-style highlight (2–4 kHz artifact zone)
+            </p>
           </div>
         </div>
       </div>
