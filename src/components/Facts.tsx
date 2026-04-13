@@ -42,23 +42,35 @@ export default function Facts() {
         ))}
       </div>
 
-      {/* Figure 4, interactive Chart.js embed */}
-      <div className="border border-bd rounded-xl overflow-hidden bg-surf mt-8 rv">
-        <div className="relative bg-[#0a0a0a]">
-          <span className="absolute top-3 left-3 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.07)] border border-[rgba(185,154,46,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
-            Fig. 4
-          </span>
-          <iframe
-            title="Figure 4, model performance: metrics, ROC curve, and confusion matrix"
-            src="/figures/figure4_model_performance.html"
-            className="w-full min-h-[520px] border-0 block"
-            sandbox="allow-scripts allow-same-origin"
-            loading="lazy"
-          />
+      {/* Figure 4, interactive Chart.js embed (glass frame + themed HTML inside) */}
+      <div className="mt-10 rv relative max-w-[900px] mx-auto">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-px rounded-2xl opacity-90"
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(185,154,46,0.35) 0%, rgba(185,154,46,0.06) 42%, rgba(255,255,255,0.04) 55%, rgba(185,154,46,0.12) 100%)',
+            filter: 'blur(0.5px)',
+          }}
+        />
+        <div className="relative rounded-2xl border border-white/[0.08] bg-[rgba(10,10,10,0.65)] backdrop-blur-xl shadow-[0_32px_64px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_55%_at_50%_-10%,rgba(185,154,46,0.1),transparent_55%)] pointer-events-none" />
+          <div className="relative">
+            <span className="absolute top-3.5 left-3.5 z-10 font-mono-c text-[9px] tracking-[0.18em] uppercase px-2.5 py-1 rounded-md text-y bg-black/40 border border-[rgba(185,154,46,0.25)] backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+              Fig. 4
+            </span>
+            <iframe
+              title="Figure 4, model performance: metrics, ROC curve, and confusion matrix"
+              src="/figures/figure4_model_performance.html"
+              className="w-full min-h-[560px] sm:min-h-[520px] border-0 block bg-transparent"
+              sandbox="allow-scripts allow-same-origin"
+              loading="lazy"
+            />
+          </div>
+          <p className="relative text-[11px] text-mt font-light px-5 py-3 border-t border-white/[0.06] text-center leading-relaxed bg-black/25 backdrop-blur-sm">
+            Figure 4, AUC-ROC, accuracy, F1, confusion matrix, and ROC curve (FoR for-2sec split)
+          </p>
         </div>
-        <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
-          Figure 4, AUC-ROC, accuracy, F1, confusion matrix, and ROC curve (FoR for-2sec split)
-        </p>
       </div>
     </section>
   )
