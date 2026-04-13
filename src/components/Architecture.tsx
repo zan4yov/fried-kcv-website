@@ -99,7 +99,7 @@ export default function Architecture() {
         {/* Pipeline */}
         <div className="rv flex items-center justify-center mb-3">
           <span className="font-mono-c text-[10px] tracking-[0.18em] uppercase text-y bg-[rgba(185,154,46,0.07)] border border-[rgba(185,154,46,0.18)] px-3 py-1 rounded">
-            {selectedLayer?.tag ?? 'Stage 2 · CV inference'}
+            {selectedLayer?.tag ?? 'Tap a stage to see the explanation'}
           </span>
         </div>
 
@@ -111,8 +111,8 @@ export default function Architecture() {
               (() => {
                 const mappedTag = PIPELINE_TO_LAYER_TAG[item.label]
                 const isMapped = Boolean(mappedTag)
-                const isActive = selectedLayerTag ? mappedTag === selectedLayerTag : item.active
-                const isSubYellow = selectedLayerTag ? isActive : Boolean(item.subYellow)
+                const isActive = selectedLayerTag ? mappedTag === selectedLayerTag : false
+                const isSubYellow = selectedLayerTag ? isActive : false
 
                 return (
               <div
