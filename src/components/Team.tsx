@@ -14,11 +14,11 @@ const members = [
   {
     initial: 'S', name: 'Safa', role: 'Backend Engineer', accent: '#A78BFA',
     tasks: [
-      'FastAPI REST service design & async architecture',
-      'Biometric authentication pipeline implementation',
-      'Speaker embedding database & user enrollment',
-      'Real-time inference API & WebSocket integration',
-      'Database schema design & performance optimization',
+      'Developed a Grad-CAM XAI pipeline including gradient computation, saliency map generation, and Mel-frequency band attribution',
+      'Integrated Qwen 2.5 for the NLP explanation pipeline with a 3-layer fallback system (API, Gemma, rule-based)',
+      'Designed and implemented the UI using Gradio, including component architecture, async streaming, and UX flow',
+      'Built an end-to-end pipeline connecting DSP, CV, XAI, and NLP into a unified system',
+      'Deployed and maintained the application on Hugging Face Spaces using ONNX Runtime, including secrets management and live debugging',
     ],
     quote: '"Every millisecond counts. Good backend is invisible until it fails."',
     quoteBorder: 'rgba(167,139,250,0.28)',
