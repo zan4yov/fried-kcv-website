@@ -102,16 +102,23 @@ export default function Architecture() {
             item.type === 'arrow' ? (
               <div key={i} className="text-mt2 text-sm flex-shrink-0 -mt-1">→</div>
             ) : (
+              (() => {
+                const mappedTag = PIPELINE_TO_LAYER_TAG[item.label]
+                const isMapped = Boolean(mappedTag)
+                const isActive = selectedLayerTag ? mappedTag === selectedLayerTag : item.active
+                const isSubYellow = selectedLayerTag ? isActive : Boolean(item.subYellow)
+
+                return (
               <div
                 key={i}
-                role={PIPELINE_TO_LAYER_TAG[item.label] ? 'button' : undefined}
-                tabIndex={PIPELINE_TO_LAYER_TAG[item.label] ? 0 : undefined}
+                role={isMapped ? 'button' : undefined}
+                tabIndex={isMapped ? 0 : undefined}
                 aria-pressed={
-                  PIPELINE_TO_LAYER_TAG[item.label] ? selectedLayerTag === PIPELINE_TO_LAYER_TAG[item.label] : undefined
+                  isMapped ? selectedLayerTag === mappedTag : undefined
                 }
-                onClick={PIPELINE_TO_LAYER_TAG[item.label] ? () => onSelectStage(item.label) : undefined}
+                onClick={isMapped ? () => onSelectStage(item.label) : undefined}
                 onKeyDown={
-                  PIPELINE_TO_LAYER_TAG[item.label]
+                  isMapped
                     ? (e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
                           e.preventDefault()
@@ -121,19 +128,21 @@ export default function Architecture() {
                     : undefined
                 }
                 className={`border rounded-[10px] px-2.5 py-3.5 text-center min-w-[118px] max-w-[140px] md:min-w-[128px] md:max-w-none bg-bg ${
-                  PIPELINE_TO_LAYER_TAG[item.label] ? 'cursor-pointer select-none' : 'cursor-default'
+                  isMapped ? 'cursor-pointer select-none' : 'cursor-default'
                 } transition-all hover:border-[rgba(185,154,46,0.22)] hover:bg-[rgba(185,154,46,0.08)] hover:-translate-y-[3px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(185,154,46,0.35)] focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(10,10,10,0.0)] ${
-                  item.active
+                  isActive
                     ? 'border-[rgba(185,154,46,0.22)] bg-[rgba(185,154,46,0.07)]'
                     : 'border-bd'
                 }`}
               >
                 <div className="text-[18px] mb-[5px]">{item.icon}</div>
                 <div className="text-[12px] md:text-[13px] font-medium text-white mb-0.5 leading-snug">{item.label}</div>
-                <div className={`font-mono-c text-[9px] md:text-[10px] tracking-[0.04em] leading-tight ${item.subYellow ? 'text-y' : 'text-mt'}`}>
+                <div className={`font-mono-c text-[9px] md:text-[10px] tracking-[0.04em] leading-tight ${isSubYellow ? 'text-y' : 'text-mt'}`}>
                   {item.sub}
                 </div>
               </div>
+                )
+              })()
             )
           )}
         </div>
