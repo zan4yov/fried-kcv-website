@@ -18,7 +18,7 @@ export default function Overview() {
           <em className="not-italic text-white/20 font-normal">matters.</em>
         </h2>
         <p className="mt-3 text-[15px] text-white/40 font-light max-w-[510px] leading-[1.75]">
-          As AI voice synthesis becomes indistinguishable from real speech, authentication systems built on voice biometrics face an existential threat.
+          In Indonesia’s family WhatsApp groups, a voice note can sound real — then get forwarded thousands of times. Sometimes the voice was never human.
         </p>
       </div>
 
@@ -26,16 +26,16 @@ export default function Overview() {
         <div>
           <div className="space-y-[15px]">
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              Generative AI tools can now clone a voice with <strong className="text-white/[0.72] font-medium">startling accuracy from as little as 3 seconds of audio</strong>. This audio can be scraped from a LinkedIn video, a webinar recording, or a voicemail — making spoofing attacks trivially accessible to bad actors.
+              We ran a small blind listening experiment during Lebaran 2026 (57 respondents; 89.3% older adults). The outcome was unsettling: <strong className="text-white/[0.72] font-medium">~90% were fooled</strong> by AI-generated voices, and <strong className="text-white/[0.72] font-medium">~20% mis-flagged a real human voice</strong> as AI.
             </p>
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              Modern voice cloning architectures — including flow-matching and hierarchical neural codecs — have moved far beyond early robotic TTS. Today's synthetic voices replicate cadence, intonation, and even micro-pauses of human speech, bypassing both human ears and legacy speaker verification.
+              This is the <strong className="text-white/[0.72] font-medium">Liar’s Dividend</strong>: deepfakes don’t just make lies believable — they also make truth suspicious. For any system that trusts voice, that’s an existential problem.
             </p>
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              <strong className="text-white/[0.72] font-medium">Fake67</strong> is our response: a four-stage, explainable pipeline that pairs EfficientNet-B4 on Mel spectrograms with Grad-CAM saliency and an LLM stack that narrates the evidence — the same story we published on Medium and ship today on Hugging Face Spaces.
+              <strong className="text-white/[0.72] font-medium">Fake67</strong> is our response: an automated, explainable pipeline that goes beyond a yes/no verdict and shows <em>why</em> it reached the conclusion — deployed as Gradio on Hugging Face Spaces.
             </p>
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              The core insight: synthetic voices leave <strong className="text-white/[0.72] font-medium">acoustic artifacts invisible to the human ear</strong> but statistically consistent across generation models — detectable through spectral analysis and deep neural networks trained on both real and AI-generated speech.
+              The core insight: synthetic voices leave <strong className="text-white/[0.72] font-medium">spectral artifacts</strong> (often around 2–4 kHz) that are easy to miss by ear but consistent enough to detect with Mel spectrograms + EfficientNet-B4, and to justify with Grad-CAM and band attribution.
             </p>
           </div>
 

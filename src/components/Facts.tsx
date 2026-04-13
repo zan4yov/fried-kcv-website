@@ -8,12 +8,12 @@ import { IconFace } from './icons/IconFace'
 interface Fact { icon: ReactNode; title: string; text: string }
 
 const facts: Fact[] = [
-  { icon: <IconRobot size={18} />,     title: 'The word "hello" is hardest',  text: 'Voice generators have trained on billions of greetings — making AI-synthesized hellos nearly indistinguishable from real ones. We had to train specifically on greeting-heavy data to close this gap.' },
-  { icon: <IconMusicNote size={18} />, title: '1980s music tech wins',        text: 'MFCC features — developed for music recognition in the 1980s — outperformed several newer deep learned representations as the single most discriminative feature in our benchmark tests.' },
-  { icon: <IconDna size={18} />,       title: '1792-d backbone embedding',    text: 'EfficientNet-B4 hands off a 1792-dimensional embedding before the two-logit head — wide enough to separate bonafide vs spoof spectrograms yet still portable for ONNX Runtime on CPU-only Spaces.' },
-  { icon: <IconHistogram size={18} />, title: 'Baselines still matter',       text: 'We sweated simpler models and ablations alongside EfficientNet-B4; the Medium write-up calls out why spectral CNNs beat ad-hoc MFCC-only shortcuts once data gets messy.' },
-  { icon: <IconBolt size={18} />,      title: '40× smaller than GPT-2',       text: 'Our detection model is 40× smaller than GPT-2, yet solves a problem GPT-2 was never designed for. It fits comfortably in a Docker container on consumer hardware. Specialized beats general-purpose, every time.' },
-  { icon: <IconFace size={18} />,      title: '80% of humans fail too',       text: 'Studies show humans perceive AI-generated voices as real ~80% of the time. Our system catches what human ears miss — which is simultaneously the point of this project and a slightly unsettling fact.' },
+  { icon: <IconFace size={18} />,      title: 'Humans get fooled',            text: 'In our Lebaran 2026 blind listening run (57 respondents), ~90% were fooled by AI-generated clips — and ~20% even flagged a real human voice as AI. The “Liar’s Dividend” is real.' },
+  { icon: <IconDna size={18} />,       title: 'EfficientNet-B4 is 1792-d',    text: 'Before the two-logit head (bonafide/spoof), EfficientNet-B4 produces a 1792-d embedding — expressive enough for spectrogram artifacts, still deployable with ONNX Runtime on CPU.' },
+  { icon: <IconHistogram size={18} />, title: 'Threshold = 0.93 (EER-tuned)', text: 'We use sigmoid(logit₁) as a spoof score in [0,1], with a decision threshold 0.93 tuned to align FAR≈FRR (EER) on the FoR for-2sec split.' },
+  { icon: <IconMusicNote size={18} />, title: '2–4 kHz is the artifact zone', text: 'Band attribution highlights a recurring high-mid region (2–4 kHz): vocal texture where many TTS systems leave consistent spectral traces.' },
+  { icon: <IconBolt size={18} />,      title: 'CPU-only demo target: <15s',   text: 'The full run (DSP → ONNX inference → Grad-CAM → NLP explanation) is designed to complete under ~15 seconds on CPU-only Hugging Face Spaces.' },
+  { icon: <IconRobot size={18} />,     title: 'The app always explains',      text: 'Stage 4 uses a 3-layer fallback (Qwen → Gemma → rule-based). Even if HF API calls timeout, users still receive a readable 3–5 sentence “why”.' },
 ]
 
 export default function Facts() {
@@ -28,7 +28,7 @@ export default function Facts() {
           <em className="not-italic text-white/20 font-normal">along the way.</em>
         </h2>
         <p className="mt-3 text-[15px] text-white/40 font-light max-w-[510px] leading-[1.75]">
-          Building this system taught us things no lecture ever mentioned.
+          Highlights pulled straight from our project README — the kind of details that make the system feel real.
         </p>
       </div>
 
