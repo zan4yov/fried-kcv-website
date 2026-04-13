@@ -6,7 +6,6 @@ import Hero           from './components/Hero'
 import Overview       from './components/Overview'
 import Architecture   from './components/Architecture'
 import Team           from './components/Team'
-import Stats          from './components/Stats'
 import Journey        from './components/Journey'
 import Facts          from './components/Facts'
 import Cta            from './components/Cta'
@@ -46,7 +45,6 @@ export default function App() {
         <Architecture/>
         <Divider/>
         <Team/>
-        <Stats/>
         <Journey/>
         <Divider/>
         <Facts/>
