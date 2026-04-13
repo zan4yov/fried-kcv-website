@@ -59,64 +59,67 @@ export default function Overview() {
           </div>
         </div>
 
-        {/* Quiz images — optimized UX (scroll on mobile, 2x2 on desktop) */}
-        <div className="border border-bd rounded-2xl overflow-hidden bg-surf">
-          <div className="relative p-3 md:p-4 bg-[#0d0d0d]">
-            <span className="absolute top-4 left-4 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.07)] border border-[rgba(185,154,46,0.18)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
+        {/* Quiz images — separated cards (bigger + clearer) */}
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase">
               Quiz results
             </span>
-
-            {/* Mobile: horizontal scroll-snap cards */}
-            <div className="pt-6 flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:hidden scroll-px-3">
-              {[
-                { src: '/figures/figure0_age_distribution.jpeg', label: 'Respondent age', alt: 'Age distribution of listening quiz respondents (57 responses)' },
-                { src: '/figures/figure0_audio01_results.jpeg', label: 'AUDIO01', alt: 'Quiz results for AUDIO01: respondents selecting Human vs Deepfake voice' },
-                { src: '/figures/figure0_audio02_results.jpeg', label: 'AUDIO02', alt: 'Quiz results for AUDIO02: respondents selecting Human vs Deepfake voice' },
-                { src: '/figures/figure0_audio03_results.jpeg', label: 'AUDIO03', alt: 'Quiz results for AUDIO03: respondents selecting Human vs Deepfake voice' },
-              ].map((img) => (
-                <a
-                  key={img.label}
-                  href={img.src}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="relative snap-start shrink-0 w-[82%] sm:w-[58%] border border-bd rounded-xl overflow-hidden bg-[#0a0a0a] hover:border-[rgba(185,154,46,0.22)] transition-colors"
-                  title="Open full image"
-                >
-                  <span className="absolute top-2 left-2 z-10 font-mono-c text-[9px] tracking-widest uppercase bg-black/55 border border-white/10 text-white/80 px-2 py-0.5 rounded">
-                    {img.label}
-                  </span>
-                  <img src={img.src} alt={img.alt} className="w-full h-auto block" loading="lazy" />
-                </a>
-              ))}
-            </div>
-
-            {/* Desktop: clean 2×2 grid */}
-            <div className="hidden lg:grid grid-cols-2 gap-3 pt-6">
-              {[
-                { src: '/figures/figure0_age_distribution.jpeg', label: 'Respondent age', alt: 'Age distribution of listening quiz respondents (57 responses)' },
-                { src: '/figures/figure0_audio01_results.jpeg', label: 'AUDIO01', alt: 'Quiz results for AUDIO01: respondents selecting Human vs Deepfake voice' },
-                { src: '/figures/figure0_audio02_results.jpeg', label: 'AUDIO02', alt: 'Quiz results for AUDIO02: respondents selecting Human vs Deepfake voice' },
-                { src: '/figures/figure0_audio03_results.jpeg', label: 'AUDIO03', alt: 'Quiz results for AUDIO03: respondents selecting Human vs Deepfake voice' },
-              ].map((img) => (
-                <a
-                  key={img.label}
-                  href={img.src}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="relative border border-bd rounded-xl overflow-hidden bg-[#0a0a0a] hover:border-[rgba(185,154,46,0.22)] transition-colors"
-                  title="Open full image"
-                >
-                  <span className="absolute top-2 left-2 z-10 font-mono-c text-[9px] tracking-widest uppercase bg-black/55 border border-white/10 text-white/80 px-2 py-0.5 rounded">
-                    {img.label}
-                  </span>
-                  <img src={img.src} alt={img.alt} className="w-full h-auto block" loading="lazy" />
-                </a>
-              ))}
-            </div>
+            <span className="text-[12px] text-white/35 font-light">
+              Click to open full-size
+            </span>
           </div>
-          <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
-            Listening quiz snapshots — swipe on mobile, click to open full-size charts.
-          </p>
+
+          {[
+            {
+              src: '/figures/figure0_age_distribution.jpeg',
+              label: 'Respondent age',
+              alt: 'Age distribution of listening quiz respondents (57 responses)',
+              caption: 'Age distribution (57 responses)',
+            },
+            {
+              src: '/figures/figure0_audio01_results.jpeg',
+              label: 'AUDIO01',
+              alt: 'Quiz results for AUDIO01: respondents selecting Human vs Deepfake voice',
+              caption: 'AUDIO01 — perceived as Human vs Deepfake',
+            },
+            {
+              src: '/figures/figure0_audio02_results.jpeg',
+              label: 'AUDIO02',
+              alt: 'Quiz results for AUDIO02: respondents selecting Human vs Deepfake voice',
+              caption: 'AUDIO02 — perceived as Human vs Deepfake',
+            },
+            {
+              src: '/figures/figure0_audio03_results.jpeg',
+              label: 'AUDIO03',
+              alt: 'Quiz results for AUDIO03: respondents selecting Human vs Deepfake voice',
+              caption: 'AUDIO03 — perceived as Human vs Deepfake',
+            },
+          ].map((img) => (
+            <a
+              key={img.label}
+              href={img.src}
+              target="_blank"
+              rel="noreferrer"
+              className="block border border-bd rounded-2xl overflow-hidden bg-surf hover:border-[rgba(185,154,46,0.22)] transition-colors"
+              title="Open full image"
+            >
+              <div className="relative p-3 md:p-4 bg-[#0d0d0d]">
+                <span className="absolute top-3 left-3 z-10 font-mono-c text-[9px] tracking-widest uppercase bg-black/55 border border-white/10 text-white/80 px-2 py-0.5 rounded">
+                  {img.label}
+                </span>
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="w-full h-auto block rounded-xl border border-bd bg-[#0a0a0a]"
+                  loading="lazy"
+                />
+              </div>
+              <div className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
+                {img.caption}
+              </div>
+            </a>
+          ))}
         </div>
       </div>
 
