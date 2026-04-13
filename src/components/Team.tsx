@@ -1,6 +1,24 @@
-const members = [
+import { useState } from 'react'
+
+type Member = {
+  initial: string
+  name: string
+  role: string
+  accent: string
+  tasks: string[]
+  quote: string
+  quoteBorder: string
+  /** File name without extension; place image at `public/team/{photoSlug}.jpg` */
+  photoSlug: string
+}
+
+const members: Member[] = [
   {
-    initial: 'F', name: 'Ferel', role: 'ML Engineer', accent: '#b99a2e',
+    initial: 'F',
+    name: 'Ferel',
+    role: 'ML Engineer',
+    accent: '#b99a2e',
+    photoSlug: 'ferel',
     tasks: [
       'EfficientNet-B4 training, evaluation, and ONNX export',
       'Mel-spectrogram + librosa DSP pipeline aligned with Medium FR-AUD specs',
@@ -12,19 +30,27 @@ const members = [
     quoteBorder: 'rgba(185,154,46,0.28)',
   },
   {
-    initial: 'S', name: 'Safa', role: 'Backend Engineer', accent: '#A78BFA',
+    initial: 'S',
+    name: 'Safa',
+    role: 'Backend Engineer',
+    accent: '#A78BFA',
+    photoSlug: 'safa',
     tasks: [
-      'Developed a Grad-CAM XAI pipeline including gradient computation, saliency map generation, and Mel-frequency band attribution',
-      'Integrated Qwen 2.5 for the NLP explanation pipeline with a 3-layer fallback system (API, Gemma, rule-based)',
-      'Designed and implemented the UI using Gradio, including component architecture, async streaming, and UX flow',
-      'Built an end-to-end pipeline connecting DSP, CV, XAI, and NLP into a unified system',
-      'Deployed and maintained the application on Hugging Face Spaces using ONNX Runtime, including secrets management and live debugging',
+      'Built a Grad-CAM XAI pipeline for saliency maps and Mel-frequency band attribution',
+      'Integrated Qwen 2.5 for NLP explanations with a fallback system (API, Gemma, rule-based)',
+      'Developed the UI using Gradio with async interaction and clear UX flow',
+      'Connected DSP, CV, XAI, and NLP into a single end-to-end pipeline',
+      'Deployed the system on Hugging Face Spaces using ONNX Runtime',
     ],
     quote: '"Every millisecond counts. Good backend is invisible until it fails."',
     quoteBorder: 'rgba(167,139,250,0.28)',
   },
   {
-    initial: 'R', name: 'Razan', role: 'Frontend & QA', accent: '#34D399',
+    initial: 'R',
+    name: 'Razan',
+    role: 'Frontend & QA',
+    accent: '#34D399',
+    photoSlug: 'razan',
     tasks: [
       'React dashboard & live audio demo interface',
       'API integration & frontend state management',
@@ -36,6 +62,39 @@ const members = [
     quoteBorder: 'rgba(52,211,153,0.28)',
   },
 ]
+
+function MemberPhoto({ slug, name, accent }: { slug: string; name: string; accent: string }) {
+  const src = `/team/${slug}.jpg`
+  const [showPhoto, setShowPhoto] = useState(true)
+
+  return (
+    <div className="relative w-full aspect-[4/5] max-h-[240px] rounded-xl overflow-hidden border border-bd bg-[rgba(255,255,255,0.02)]">
+      {showPhoto ? (
+        <img
+          src={src}
+          alt={`${name}, team portrait`}
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+          onError={() => setShowPhoto(false)}
+        />
+      ) : null}
+      {!showPhoto ? (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-4 text-center">
+          <div
+            className="w-14 h-14 rounded-full flex items-center justify-center font-serif-i text-xl text-black/80"
+            style={{ background: accent }}
+          >
+            {name.slice(0, 1)}
+          </div>
+          <span className="font-mono-c text-[9px] tracking-[0.18em] uppercase text-mt2">Photo placeholder</span>
+          <span className="text-[10px] text-white/30 leading-snug">
+            Add <span className="font-mono-c text-white/45">public/team/{slug}.jpg</span>
+          </span>
+        </div>
+      ) : null}
+    </div>
+  )
+}
 
 export default function Team() {
   return (
@@ -59,19 +118,22 @@ export default function Team() {
             key={m.name}
             className="border border-bd rounded-xl px-[22px] py-6 flex flex-col gap-[18px] transition-all duration-200 hover:border-[rgba(185,154,46,0.18)] hover:bg-[rgba(185,154,46,0.07)]"
           >
-            <div
-              className="w-[42px] h-[42px] rounded-[9px] flex items-center justify-center font-serif-i text-[19px] text-black"
-              style={{ background: m.accent }}
-            >
-              {m.initial}
-            </div>
+            <MemberPhoto slug={m.photoSlug} name={m.name} accent={m.accent} />
 
-            <div>
-              <div className="font-serif-i text-[1.85rem] text-white leading-none tracking-[-0.5px] mb-[3px]">
-                {m.name}
+            <div className="flex items-start gap-3">
+              <div
+                className="w-[42px] h-[42px] rounded-[9px] flex items-center justify-center font-serif-i text-[19px] text-black flex-shrink-0"
+                style={{ background: m.accent }}
+              >
+                {m.initial}
               </div>
-              <div className="font-mono-c text-[10px] tracking-[0.1em] uppercase" style={{ color: m.accent }}>
-                {m.role}
+              <div className="min-w-0">
+                <div className="font-serif-i text-[1.85rem] text-white leading-none tracking-[-0.5px] mb-[3px]">
+                  {m.name}
+                </div>
+                <div className="font-mono-c text-[10px] tracking-[0.1em] uppercase" style={{ color: m.accent }}>
+                  {m.role}
+                </div>
               </div>
             </div>
 
