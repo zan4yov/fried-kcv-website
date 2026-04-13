@@ -21,7 +21,11 @@ export default function Hero() {
         className="font-serif-i text-[clamp(2.1rem,4.2vw,3.6rem)] leading-[1.08] tracking-[-1.2px] text-white mb-7 anim-fu text-balance"
         style={{ animationDelay: '200ms' }}
       >
-        Fake67: Explainable Deepfake Audio Detection via Spectrograms Using EfficientNet-B4 and GradCAM
+        Fake67: Explainable{' '}
+        <span className="text-y">
+          Deepfake Audio Detection
+        </span>{' '}
+        via Spectrograms Using EfficientNet-B4 and GradCAM
       </h1>
 
       <p
