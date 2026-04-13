@@ -8,7 +8,7 @@ const members = [
       'Dataset curation, augmentation & class balancing',
       'Research documentation & Medium article writeup',
     ],
-    quote: '"Building the brain that tells real from fake — one epoch at a time."',
+    quote: '"Building the brain that tells real from fake, one epoch at a time."',
     quoteBorder: 'rgba(185,154,46,0.28)',
   },
   {

@@ -20,7 +20,7 @@ export default function Footer() {
           />
           <span className="text-[13px] font-medium text-white/45">Fake67</span>
         </div>
-        <div className="text-xs text-mt2">© 2026 Ferel · Safa · Razan — Final Project KCVanguard 2026</div>
+        <div className="text-xs text-mt2">© 2026 Ferel · Safa · Razan, Final Project KCVanguard 2026</div>
       </div>
 
       <div className="flex gap-[5px] flex-wrap">

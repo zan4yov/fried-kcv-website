@@ -92,7 +92,7 @@ export default function Architecture() {
             <em className="not-italic text-white/20 font-normal">works.</em>
           </h2>
           <p className="mt-3 text-[15px] text-white/40 font-light max-w-[510px] leading-[1.75]">
-            The same four-stage story as on Medium: WAV/FLAC in, Mel tensor out of DSP, EfficientNet-B4 ONNX for the score, Grad-CAM for proof, NLP for a human-readable paragraph — wired together in Gradio on Hugging Face Spaces.
+            The same four-stage story as on Medium: WAV/FLAC in, Mel tensor out of DSP, EfficientNet-B4 ONNX for the score, Grad-CAM for proof, NLP for a human-readable paragraph, wired together in Gradio on Hugging Face Spaces.
           </p>
         </div>
 
@@ -198,13 +198,13 @@ export default function Architecture() {
             </span>
             <img
               src="/figures/figure2_system_pipeline.jpeg"
-              alt="Figure 2 — End-to-end system pipeline: audio DSP to CV inference, Grad-CAM, and NLP explanation"
+              alt="Figure 2, end-to-end system pipeline: audio DSP to CV inference, Grad-CAM, and NLP explanation"
               className="w-full h-auto block rounded-lg border border-bd bg-[#0a0a0a] object-contain max-h-[540px] md:max-h-[640px]"
               loading="lazy"
             />
           </div>
           <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
-            Figure 2 — End-to-end pipeline from WAV input → Mel spectrogram → EfficientNet inference → Grad-CAM & band attribution → LLM explanation
+            Figure 2, end-to-end pipeline from WAV input → Mel spectrogram → EfficientNet inference → Grad-CAM and band attribution → LLM explanation
           </p>
         </div>
 
@@ -239,7 +239,7 @@ export default function Architecture() {
             </div>
           </div>
 
-          {/* Figure 3 — interactive Mel comparison (canvas) */}
+            {/* Figure 3, interactive Mel comparison (canvas) */}
           <div className="border border-bd rounded-2xl overflow-hidden bg-surf">
             <div className="relative bg-[#0a0a0a]">
               <span className="absolute top-3 left-3 z-10 font-mono-c text-[9px] bg-[rgba(185,154,46,0.1)] border border-[rgba(185,154,46,0.22)] text-y px-2.5 py-0.5 rounded tracking-widest uppercase">
@@ -247,7 +247,7 @@ export default function Architecture() {
               </span>
               <iframe
                 ref={fig3FrameRef}
-                title="Figure 3 — Mel spectrogram comparison: genuine vs AI-generated TTS"
+                  title="Figure 3, Mel spectrogram comparison: genuine vs AI-generated TTS"
                 src="/figures/figure3_mel_spectrogram_comparison.html"
                 className="w-full min-h-[360px] md:min-h-[440px] border-0 block"
                 sandbox="allow-scripts allow-same-origin"
@@ -255,7 +255,7 @@ export default function Architecture() {
               />
             </div>
             <p className="text-xs text-mt px-4 py-3 border-t border-bd italic text-center">
-              Figure 3 — Genuine vs. synthetic Mel spectrograms with band attribution and Grad-CAM-style highlight (2–4 kHz artifact zone)
+                Figure 3, genuine vs. synthetic Mel spectrograms with band attribution and Grad-CAM-style highlight (2–4 kHz artifact zone)
             </p>
           </div>
         </div>

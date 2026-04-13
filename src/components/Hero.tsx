@@ -29,7 +29,7 @@ export default function Hero() {
         style={{ animationDelay: '300ms' }}
       >
         Explainable deepfake audio detection via Mel spectrograms using EfficientNet-B4
-        and Grad-CAM — with a 3-layer NLP fallback that always explains why.
+        and Grad-CAM, with a 3-layer NLP fallback that always explains why.
       </p>
 
       <div

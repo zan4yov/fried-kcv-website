@@ -11,15 +11,15 @@ interface Story { icon: ReactNode; title: string; desc: string; last?: boolean }
 
 const obstacles: Obstacle[] = [
   { tag: 'Dataset',     title: 'Choosing the right audio split', desc: 'We needed clear bonafide vs spoof labels with enough synthesis variety to avoid overfitting. We chose the Kaggle Fake-or-Real (FoR) dataset and used the for-2sec split for uniform preprocessing, consistent Mel dimensions, and a realistic “WhatsApp voice note” context.' },
-  { tag: 'Model',       title: 'The “AUC ≠ usable” wake-up call', desc: 'We learned that a strong AUC does not guarantee a good decision boundary. Threshold-based accuracy collapsed when the model became overly aggressive. The fix wasn’t changing the model — it was calibrating how we interpret its spoof scores.' },
+  { tag: 'Model',       title: 'The “AUC ≠ usable” wake-up call', desc: 'We learned that a strong AUC does not guarantee a good decision boundary. Threshold-based accuracy collapsed when the model became overly aggressive. The fix wasn’t changing the model, it was calibrating how we interpret its spoof scores.' },
   { tag: 'Calibration', title: 'Sweeping thresholds for stability', desc: 'We systematically explored thresholds and found meaningful operating points (~0.969 EER-optimal; ~0.967 risk-aware), then finalized decision_threshold = 0.93 as a stable, balanced setting with ~0.86 accuracy and ~0.86 F1.' },
   { tag: 'Deployment',  title: 'From Colab notebook to a real app', desc: 'Moving to Hugging Face Spaces forced engineering discipline: modular files (UI “Commander”, DSP “Translator”, CV “Engine Room”, NLP “Narrator”), exporting `best_model.pth`, converting to ONNX for portability, and shipping a demo that feels usable.', last: true },
 ]
 
 const stories: Story[] = [
-  { icon: <IconMoon size={14} />,    title: 'The “truth gap” moment', desc: 'We started mid-March and accidentally hit the perfect timing: Lebaran WhatsApp hoaxes. The blind listening quiz made the threat feel immediate — not theoretical — and set the bar for why the system must be explainable.' },
+  { icon: <IconMoon size={14} />,    title: 'The “truth gap” moment', desc: 'We started mid-March and accidentally hit the perfect timing: Lebaran WhatsApp hoaxes. The blind listening quiz made the threat feel immediate, not theoretical, and set the bar for why the system must be explainable.' },
   { icon: <IconMasks size={14} />,   title: 'From black box to reasoning', desc: 'Grad-CAM changed the product: instead of blindly trusting the label, users see which time–frequency regions influenced the decision, making the system feel transparent rather than magical.' },
-  { icon: <IconCoffee size={14} />,  title: 'From numbers to meaning', desc: 'We added a Qwen 2.5 NLP layer so non-technical users can understand the result. It converts label, confidence, and band distribution into a clear explanation — the final step that makes the UI accessible.' },
+  { icon: <IconCoffee size={14} />,  title: 'From numbers to meaning', desc: 'We added a Qwen 2.5 NLP layer so non-technical users can understand the result. It converts label, confidence, and band distribution into a clear explanation, the final step that makes the UI accessible.' },
   { icon: <IconRefresh size={14} />, title: 'Never return an empty explanation', desc: 'The deployment uses a three-level fallback: Qwen 2.5 (timeout-guarded) → Gemma 2B → rule-based local text. Even with network failures, the app always produces a four-sentence explanation.', last: true },
 ]
 
@@ -35,7 +35,7 @@ export default function Journey() {
           <em className="not-italic text-white/20 font-normal">breakthroughs.</em>
         </h2>
         <p className="mt-3 text-[15px] text-white/40 font-light max-w-[510px] leading-[1.75]">
-          The path to a working system was anything but linear. Here's what we faced — and how we got through it.
+          The path to a working system was anything but linear. Here's what we faced, and how we got through it.
         </p>
       </div>
 

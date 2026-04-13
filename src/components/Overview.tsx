@@ -18,7 +18,7 @@ export default function Overview() {
           <em className="not-italic text-white/20 font-normal">matters.</em>
         </h2>
         <p className="mt-3 text-[15px] text-white/40 font-light max-w-[510px] leading-[1.75]">
-          A video appears in a family WhatsApp group — disaster, crisis, a shocking event — and a calm voice explains what’s happening. It sounds convincing. It sounds real. Within minutes, it spreads.
+          A video appears in a family WhatsApp group, disaster, crisis, a shocking event, and a calm voice explains what’s happening. It sounds convincing. It sounds real. Within minutes, it spreads.
         </p>
       </div>
 
@@ -27,13 +27,13 @@ export default function Overview() {
         <div className="min-w-0">
           <div className="space-y-[15px]">
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              In today’s digital era, misinformation no longer relies on text and manipulated images alone. With AI-generated voices, fake content becomes far more persuasive — especially for older generations who see voice notes as a personal “digital handshake.”
+              In today’s digital era, misinformation no longer relies on text and manipulated images alone. With AI-generated voices, fake content becomes far more persuasive, especially for older generations who see voice notes as a personal “digital handshake.”
             </p>
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
               We quantified this with a Lebaran-season blind listening “Simple Quiz” (57 respondents; 89.3% Boomers/older adults): on two deepfake clips, <strong className="text-white/[0.72] font-medium">nearly 90% were fooled</strong>, and on a real human clip <strong className="text-white/[0.72] font-medium">~20% flagged it as AI</strong>.
             </p>
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-              That reversal is the <strong className="text-white/[0.72] font-medium">Liar’s Dividend</strong>: deepfakes don’t just make lies believable — they make truth suspicious. This is why an automated, explainable detector isn’t just useful; it’s necessary.
+              That reversal is the <strong className="text-white/[0.72] font-medium">Liar’s Dividend</strong>: deepfakes don’t just make lies believable, they make truth suspicious. This is why an automated, explainable detector isn’t just useful, it’s necessary.
             </p>
             <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
               <strong className="text-white/[0.72] font-medium">Fake67</strong> turns raw audio into a prediction plus a human-readable explanation: DSP converts waveform → spectrogram, EfficientNet-B4 classifies bonafide vs spoof, Grad-CAM highlights influential regions, and an LLM (Qwen 2.5) narrates the evidence in plain language.
@@ -48,18 +48,18 @@ export default function Overview() {
               </span>
               <img
                 src="/figures/figure1_system_overview.svg"
-                alt="Figure 1 — Fake67 four-stage detection pipeline: WAV/FLAC through Audio DSP, CV inference, Grad-CAM, and NLP explanation"
+                alt="Figure 1, Fake67 four-stage detection pipeline: WAV/FLAC through Audio DSP, CV inference, Grad-CAM, and NLP explanation"
                 className="w-full h-auto block rounded-lg"
                 loading="lazy"
               />
             </div>
             <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
-              Figure 1 — Fake67 four-stage system overview (audio DSP → EfficientNet-B4 → Grad-CAM → NLP)
+              Figure 1, Fake67 four-stage system overview (audio DSP → EfficientNet-B4 → Grad-CAM → NLP)
             </p>
           </div>
         </div>
 
-        {/* Quiz images — separated cards (bigger + clearer) */}
+        {/* Quiz images, separated cards (bigger + clearer) */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase">
@@ -81,19 +81,19 @@ export default function Overview() {
               src: '/figures/figure0_audio01_results.jpeg',
               label: 'AUDIO01',
               alt: 'Quiz results for AUDIO01: respondents selecting Human vs Deepfake voice',
-              caption: 'AUDIO01 — perceived as Human vs Deepfake',
+              caption: 'AUDIO01, perceived as Human vs Deepfake',
             },
             {
               src: '/figures/figure0_audio02_results.jpeg',
               label: 'AUDIO02',
               alt: 'Quiz results for AUDIO02: respondents selecting Human vs Deepfake voice',
-              caption: 'AUDIO02 — perceived as Human vs Deepfake',
+              caption: 'AUDIO02, perceived as Human vs Deepfake',
             },
             {
               src: '/figures/figure0_audio03_results.jpeg',
               label: 'AUDIO03',
               alt: 'Quiz results for AUDIO03: respondents selecting Human vs Deepfake voice',
-              caption: 'AUDIO03 — perceived as Human vs Deepfake',
+              caption: 'AUDIO03, perceived as Human vs Deepfake',
             },
           ].map((img) => (
             <a
@@ -130,7 +130,7 @@ export default function Overview() {
             Project Goals
           </span>
           <p className="text-[14px] text-white/40 font-light leading-[1.8] max-w-[680px]">
-            What we set out to build — and the constraints we refused to compromise on.
+            What we set out to build, and the constraints we refused to compromise on.
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-3">
