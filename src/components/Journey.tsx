@@ -15,8 +15,8 @@ const obstacles: Obstacle[] = [
   { tag: 'Calibration', title: 'Sweeping thresholds for stability', desc: 'We systematically explored thresholds and found meaningful operating points (~0.969 EER-optimal; ~0.967 risk-aware), then finalized decision_threshold = 0.93 as a stable, balanced setting with ~0.86 accuracy and ~0.86 F1.' },
   {
     tag: 'Resources',
-    title: 'Free tiers, Colab disconnects, and making every GPU hour count',
-    desc: 'We maximized free-tier infrastructure where we could: Colab for training, Hugging Face for datasets, Inference API, and Spaces hosting. Google Colab Free was the painful part: sessions would idle or disconnect in the middle of long EfficientNet-B4 fine-tuning, sometimes after roughly half an hour, sometimes closer to an hour, which is exactly when multi-epoch runs are still chewing through the FoR split. Without guardrails you lose weights, time, and morale. We followed the playbook in our project README: aggressive checkpointing every few epochs, writing checkpoints to Google Drive, and resuming from the latest best_model.pth so a dropped runtime was a pause, not a restart from zero.',
+    title: 'Free tiers and Colab cutting out mid-run',
+    desc: 'We stacked Colab, HF datasets, APIs, and Spaces on free tiers where we could. Colab Free often dropped or idled mid-training (often around 30 to 60 minutes in), right when EfficientNet-B4 was still chewing epochs on FoR. Frequent checkpoints to Drive and resuming from `best_model.pth` turned a crash into a pause, not a full redo.',
   },
   { tag: 'Deployment',  title: 'From Colab notebook to a real app', desc: 'Moving to Hugging Face Spaces forced engineering discipline: modular files (UI “Commander”, DSP “Translator”, CV “Engine Room”, NLP “Narrator”), exporting `best_model.pth`, converting to ONNX for portability, and shipping a demo that feels usable.', last: true },
 ]
