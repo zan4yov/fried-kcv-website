@@ -49,23 +49,14 @@ export default function Overview() {
         </p>
       </div>
 
-      {/* Narrative: aligns with the quiz charts below */}
-      <div className="max-w-[720px] space-y-[15px] mb-10">
+      {/* Opening narrative, then quiz charts, then interpretation + Fake67 */}
+      <div className="max-w-[720px] mb-8">
         <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
           In today’s digital era, misinformation no longer relies only on text or manipulated images. With AI-generated voices, fake content becomes far more persuasive, especially for older generations who often perceive voice notes as a personal “digital handshake.”
         </p>
-        <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-          We captured this with a Lebaran-season blind listening Simple Quiz (57 responses), shown in the charts. The respondent pool skewed older: <strong className="text-white/[0.72] font-medium">87.7%</strong> were over 40. On two AI-generated clips, most listeners still chose “human voice”: <strong className="text-white/[0.72] font-medium">AUDIO01</strong> split <strong className="text-white/[0.72] font-medium">82.5%</strong> vs <strong className="text-white/[0.72] font-medium">17.5%</strong>, and <strong className="text-white/[0.72] font-medium">AUDIO03</strong> split <strong className="text-white/[0.72] font-medium">87.7%</strong> vs <strong className="text-white/[0.72] font-medium">12.3%</strong> (human vs deepfake). On the genuine clip, <strong className="text-white/[0.72] font-medium">AUDIO02</strong>, the chart reads <strong className="text-white/[0.72] font-medium">80.7%</strong> vs <strong className="text-white/[0.72] font-medium">19.3%</strong>, so nearly one in five listeners suspected real speech of being synthetic.
-        </p>
-        <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-          This reversal reflects what is known as the Liar’s Dividend: deepfakes do not only make false information believable, they also make real information appear suspicious. As a result, detecting synthetic audio becomes increasingly important.
-        </p>
-        <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-          To address this challenge, Fake67 transforms raw audio into both a prediction and a human-readable explanation. The system first converts waveform audio into a spectrogram using Digital Signal Processing (DSP). The spectrogram is then analyzed by EfficientNet-B4 to classify the audio as bonafide or spoof. GradCAM highlights the most influential regions of the spectrogram, and finally an LLM, Qwen 2.5, generates a clear explanation of the evidence in plain language.
-        </p>
       </div>
 
-      {/* Quiz results */}
+      {/* Quiz results (between narrative ¶1 and ¶2) */}
       <div className="mb-10">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
           <span className="font-mono-c text-[10px] tracking-[0.18em] text-y uppercase">
@@ -99,6 +90,18 @@ export default function Overview() {
             </a>
           ))}
         </div>
+      </div>
+
+      <div className="max-w-[720px] space-y-[15px] mb-10">
+        <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
+          We captured this with a Lebaran-season blind listening Simple Quiz (57 responses), shown in the charts. The respondent pool skewed older: <strong className="text-white/[0.72] font-medium">87.7%</strong> were over 40. On two AI-generated clips, most listeners still chose “human voice”: <strong className="text-white/[0.72] font-medium">AUDIO01</strong> split <strong className="text-white/[0.72] font-medium">82.5%</strong> vs <strong className="text-white/[0.72] font-medium">17.5%</strong>, and <strong className="text-white/[0.72] font-medium">AUDIO03</strong> split <strong className="text-white/[0.72] font-medium">87.7%</strong> vs <strong className="text-white/[0.72] font-medium">12.3%</strong> (human vs deepfake). On the genuine clip, <strong className="text-white/[0.72] font-medium">AUDIO02</strong>, the chart reads <strong className="text-white/[0.72] font-medium">80.7%</strong> vs <strong className="text-white/[0.72] font-medium">19.3%</strong>, so nearly one in five listeners suspected real speech of being synthetic.
+        </p>
+        <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
+          This reversal reflects what is known as the Liar’s Dividend: deepfakes do not only make false information believable, they also make real information appear suspicious. As a result, detecting synthetic audio becomes increasingly important.
+        </p>
+        <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
+          To address this challenge, Fake67 transforms raw audio into both a prediction and a human-readable explanation. The system first converts waveform audio into a spectrogram using Digital Signal Processing (DSP). The spectrogram is then analyzed by EfficientNet-B4 to classify the audio as bonafide or spoof. GradCAM highlights the most influential regions of the spectrogram, and finally an LLM, Qwen 2.5, generates a clear explanation of the evidence in plain language.
+        </p>
       </div>
 
       {/* Figure 1, pipeline overview (replaces prior SVG) */}
