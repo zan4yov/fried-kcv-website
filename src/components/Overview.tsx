@@ -1,6 +1,6 @@
 const goals = [
   { n: '01', title: 'Spectrogram-first spoof detection',    desc: 'Treat each clip as a visual task: 128-bin Mel → 224² RGB-style tensor → EfficientNet-B4 with a two-logit head, tuned to the FoR for-2sec split with an EER-aligned threshold at 0.93.' },
-  { n: '02', title: 'Show your work with Grad-CAM',        desc: 'Surface class-discriminative regions on the Mel image, Jet overlay at 50% opacity, and four-band frequency attribution so users see why the model hesitated or flagged spoof.' },
+  { n: '02', title: 'Show your work with GradCAM',        desc: 'Surface class-discriminative regions on the Mel image, Jet overlay at 50% opacity, and four-band frequency attribution so users see why the model hesitated or flagged spoof.' },
   { n: '03', title: 'Ship a CPU-friendly demo',            desc: 'Package the full four-stage stack inside Gradio on Hugging Face Spaces with ONNX Runtime so classmates can upload a file without GPUs and still get a verdict under ~15 seconds.' },
   { n: '04', title: 'Narrate every run',                   desc: 'Pipe logits, confidence, and band weights into Qwen 2.5-7B-Instruct (async HF API), then Gemma 2B, then a deterministic fallback so the explanation column never comes back empty.' },
   { n: '05', title: 'Stay honest on limitations',           desc: 'Document codec quirks, HF rate limits, and the Liar’s Dividend findings from our blind listening study so the UI reads as research-grade, not magic.' },
@@ -61,7 +61,7 @@ export default function Overview() {
           This reversal reflects what is known as the Liar’s Dividend: deepfakes do not only make false information believable, they also make real information appear suspicious. As a result, detecting synthetic audio becomes increasingly important.
         </p>
         <p className="text-[15px] text-white/[0.48] font-light leading-[1.85]">
-          To address this challenge, Fake67 transforms raw audio into both a prediction and a human-readable explanation. The system first converts waveform audio into a spectrogram using Digital Signal Processing (DSP). The spectrogram is then analyzed by EfficientNet-B4 to classify the audio as bonafide or spoof. Grad-CAM highlights the most influential regions of the spectrogram, and finally an LLM, Qwen 2.5, generates a clear explanation of the evidence in plain language.
+          To address this challenge, Fake67 transforms raw audio into both a prediction and a human-readable explanation. The system first converts waveform audio into a spectrogram using Digital Signal Processing (DSP). The spectrogram is then analyzed by EfficientNet-B4 to classify the audio as bonafide or spoof. GradCAM highlights the most influential regions of the spectrogram, and finally an LLM, Qwen 2.5, generates a clear explanation of the evidence in plain language.
         </p>
       </div>
 
@@ -106,7 +106,7 @@ export default function Overview() {
         <div className="relative p-3 md:p-5 bg-[#f5f5f5]">
           <img
             src="/figures/figure1_pipeline_overview.jpeg"
-            alt="Figure 1, Fake67 pipeline flowchart: WAV/FLAC input, Stage 1 Audio DSP, parallel Stage 2 CV inference and Stage 3 Grad-CAM XAI, Stage 4 NLP explanation with Qwen and fallbacks, Gradio output on Hugging Face Spaces"
+            alt="Figure 1, Fake67 pipeline flowchart: WAV/FLAC input, Stage 1 Audio DSP, parallel Stage 2 CV inference and Stage 3 GradCAM XAI, Stage 4 NLP explanation with Qwen and fallbacks, Gradio output on Hugging Face Spaces"
             className="w-full h-auto block rounded-lg border border-bd bg-white"
             loading="lazy"
           />

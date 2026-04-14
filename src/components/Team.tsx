@@ -32,7 +32,7 @@ const members: Member[] = [
     accent: '#A78BFA',
     photoSlug: 'safa',
     tasks: [
-      'Built a Grad-CAM XAI pipeline for saliency maps and Mel-frequency band attribution',
+      'Built a GradCAM XAI pipeline for saliency maps and Mel-frequency band attribution',
       'Integrated Qwen 2.5 for NLP explanations with a fallback system',
       'Developed the UI using Gradio with async interaction and clear UX flow',
       'Connected DSP, CV, XAI, and NLP into a single end-to-end pipeline',

@@ -33,7 +33,7 @@ export default function Hero() {
         style={{ animationDelay: '300ms' }}
       >
         Explainable deepfake audio detection via Mel spectrograms using EfficientNet-B4
-        and Grad-CAM, with a 3-layer NLP fallback that always explains why.
+        and GradCAM, with a 3-layer NLP fallback that always explains why.
       </p>
 
       <div
@@ -45,7 +45,7 @@ export default function Hero() {
         </div>
         <img
           src="/demo-fried-kcv.gif"
-          alt="Screen recording of the Fake67 Gradio app: upload WAV or FLAC, run pipeline, view verdict, spectrogram, Grad-CAM overlay, and NLP explanation"
+          alt="Screen recording of the Fake67 Gradio app: upload WAV or FLAC, run pipeline, view verdict, spectrogram, GradCAM overlay, and NLP explanation"
           className="w-full h-auto block"
           loading="lazy"
         />

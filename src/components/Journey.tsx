@@ -18,7 +18,7 @@ const obstacles: Obstacle[] = [
 
 const stories: Story[] = [
   { icon: <IconMoon size={14} />,    title: 'The “truth gap” moment', desc: 'We started mid-March and accidentally hit the perfect timing: Lebaran WhatsApp hoaxes. The blind listening quiz made the threat feel immediate, not theoretical, and set the bar for why the system must be explainable.' },
-  { icon: <IconMasks size={14} />,   title: 'From black box to reasoning', desc: 'Grad-CAM changed the product: instead of blindly trusting the label, users see which time–frequency regions influenced the decision, making the system feel transparent rather than magical.' },
+  { icon: <IconMasks size={14} />,   title: 'From black box to reasoning', desc: 'GradCAM changed the product: instead of blindly trusting the label, users see which time–frequency regions influenced the decision, making the system feel transparent rather than magical.' },
   { icon: <IconCoffee size={14} />,  title: 'From numbers to meaning', desc: 'We added a Qwen 2.5 NLP layer so non-technical users can understand the result. It converts label, confidence, and band distribution into a clear explanation, the final step that makes the UI accessible.' },
   { icon: <IconRefresh size={14} />, title: 'Never return an empty explanation', desc: 'The deployment uses a three-level fallback: Qwen 2.5 (timeout-guarded) → Gemma 2B → rule-based local text. Even with network failures, the app always produces a four-sentence explanation.', last: true },
 ]

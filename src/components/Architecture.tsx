@@ -13,7 +13,7 @@ const PIPELINE_TO_LAYER_TAG: Record<string, string> = {
   'Audio input': 'Audio input',
   'Stage 1 · Audio DSP': 'Stage 1 · Audio DSP',
   'Stage 2 · CV inference': 'Stage 2 · CV inference',
-  'Stage 3 · Grad-CAM': 'Stage 3 · Grad-CAM (XAI)',
+  'Stage 3 · GradCAM': 'Stage 3 · GradCAM (XAI)',
   'Stage 4 · NLP': 'Stage 4 · NLP explanation',
 }
 
@@ -24,7 +24,7 @@ const pipelineItems: PipelineItem[] = [
   { type: 'arrow' },
   { type: 'node', icon: <IconBrain />,      label: 'Stage 2 · CV inference', sub: 'EfficientNet-B4 · ONNX',   active: true, subYellow: true },
   { type: 'arrow' },
-  { type: 'node', icon: <IconLineChart />, label: 'Stage 3 · Grad-CAM',   sub: 'XAI · 4-band Mel',            active: false },
+  { type: 'node', icon: <IconLineChart />, label: 'Stage 3 · GradCAM',   sub: 'XAI · 4-band Mel',            active: false },
   { type: 'arrow' },
   { type: 'node', icon: <IconRobot />,      label: 'Stage 4 · NLP',      sub: 'Qwen · Gemma · rules',        active: false },
 ]
@@ -37,13 +37,13 @@ const layers = [
   },
   { tag: 'Stage 1 · Audio DSP', name: 'librosa preprocessing', desc: 'Load → resample 16 kHz mono → STFT → 128 Mel bins → dB normalisation → resize 224×224 → stack to a 3×224×224 float32 tensor aligned with ImageNet-pretrained backbones.' },
   { tag: 'Stage 2 · CV inference', name: 'EfficientNet-B4 + ONNX Runtime', desc: 'Spectrogram is classified as bonafide vs spoof with a two-logit head; sigmoid on the spoof logit yields a score in [0, 1] with an EER-tuned threshold at 0.93 on the FoR for-2sec split.' },
-  { tag: 'Stage 3 · Grad-CAM (XAI)', name: 'Saliency on the last conv feature map', desc: 'Gradients of the predicted class w.r.t. late feature maps produce a heatmap (Jet overlay at 50%) plus four-band Mel attribution so users see which frequency regions drove the verdict.' },
+  { tag: 'Stage 3 · GradCAM (XAI)', name: 'Saliency on the last conv feature map', desc: 'Gradients of the predicted class w.r.t. late feature maps produce a heatmap (Jet overlay at 50%) plus four-band Mel attribution so users see which frequency regions drove the verdict.' },
   { tag: 'Stage 4 · NLP explanation', name: 'Instruction-tuned LLM with resilient fallbacks', desc: 'A structured prompt carries label, confidence, and band weights; Qwen 2.5-7B-Instruct is called async via the HF API, then Gemma 2B, then a local rule-based explainer so the UI never returns an empty story.' },
 ]
 
 const techStack = [
-  { label: 'Machine learning', chips: [{ name: 'PyTorch', y: true }, { name: 'ONNX Runtime', y: true }, { name: 'librosa', y: true }, { name: 'grad-cam', y: true }, { name: 'scikit-learn', y: false }] },
-  { label: 'Explainability & APIs', chips: [{ name: 'Grad-CAM', y: true }, { name: 'HF Inference API', y: false }, { name: 'OpenAI-compatible client', y: false }] },
+  { label: 'Machine learning', chips: [{ name: 'PyTorch', y: true }, { name: 'ONNX Runtime', y: true }, { name: 'librosa', y: true }, { name: 'scikit-learn', y: false }] },
+  { label: 'Explainability & APIs', chips: [{ name: 'GradCAM', y: true }, { name: 'HF Inference API', y: false }, { name: 'OpenAI-compatible client', y: false }] },
   { label: 'App & deployment', chips: [{ name: 'Gradio 4.44', y: true }, { name: 'Hugging Face Spaces', y: true }, { name: 'Python 3.10', y: false }] },
   { label: 'Dataset', chips: [{ name: 'FoR for-2sec', y: true }, { name: 'Fake-or-Real (FoR)', y: false }, { name: 'Kaggle', y: false }] },
 ]
@@ -83,7 +83,7 @@ export default function Architecture() {
             <em className="not-italic text-white/20 font-normal">works.</em>
           </h2>
           <p className="mt-3 text-[15px] text-white/40 font-light max-w-[510px] leading-[1.75]">
-            The same four-stage story as on Medium: WAV/FLAC in, Mel tensor out of DSP, EfficientNet-B4 ONNX for the score, Grad-CAM for proof, NLP for a human-readable paragraph, wired together in Gradio on Hugging Face Spaces.
+            The same four-stage story as on Medium: WAV/FLAC in, Mel tensor out of DSP, EfficientNet-B4 ONNX for the score, GradCAM for proof, NLP for a human-readable paragraph, wired together in Gradio on Hugging Face Spaces.
           </p>
         </div>
 
@@ -162,7 +162,7 @@ export default function Architecture() {
                   {selectedLayer ? selectedLayer.tag : 'Tap a stage to see the explanation'}
                 </div>
                 <div className="mt-1 text-[15px] md:text-[16px] font-medium text-white/80 leading-snug">
-                  {selectedLayer ? selectedLayer.name : 'Audio DSP → CV inference → Grad-CAM → NLP'}
+                  {selectedLayer ? selectedLayer.name : 'Audio DSP → CV inference → GradCAM → NLP'}
                 </div>
                 <div className="mt-2 text-[13px] text-mt font-light leading-[1.75]">
                   {selectedLayer
@@ -191,13 +191,13 @@ export default function Architecture() {
           <div className="relative p-3 md:p-4 bg-[#0d0d0d]">
             <img
               src="/figures/figure2_system_pipeline.jpeg"
-              alt="Figure 2, end-to-end system pipeline: audio DSP to CV inference, Grad-CAM, and NLP explanation"
+              alt="Figure 2, end-to-end system pipeline: audio DSP to CV inference, GradCAM, and NLP explanation"
               className="w-full h-auto block rounded-lg border border-bd bg-[#0a0a0a] object-contain max-h-[540px] md:max-h-[640px]"
               loading="lazy"
             />
           </div>
           <p className="text-xs text-mt px-4 py-2.5 border-t border-bd italic text-center">
-            Figure 2, end-to-end pipeline from WAV input → Mel spectrogram → EfficientNet inference → Grad-CAM and band attribution → LLM explanation
+            Figure 2, end-to-end pipeline from WAV input → Mel spectrogram → EfficientNet inference → GradCAM and band attribution → LLM explanation
           </p>
         </div>
 
