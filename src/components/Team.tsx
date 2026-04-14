@@ -6,8 +6,6 @@ type Member = {
   role: string
   accent: string
   tasks: string[]
-  quote: string
-  quoteBorder: string
   /** File name without extension; place image at `public/team/{photoSlug}.jpg` */
   photoSlug: string
 }
@@ -26,8 +24,6 @@ const members: Member[] = [
       'Dataset curation, augmentation & class balancing',
       'Research documentation & Medium article writeup',
     ],
-    quote: '"Building the brain that tells real from fake, one epoch at a time."',
-    quoteBorder: 'rgba(185,154,46,0.28)',
   },
   {
     initial: 'S',
@@ -37,13 +33,11 @@ const members: Member[] = [
     photoSlug: 'safa',
     tasks: [
       'Built a Grad-CAM XAI pipeline for saliency maps and Mel-frequency band attribution',
-      'Integrated Qwen 2.5 for NLP explanations with a fallback system (API, Gemma, rule-based)',
+      'Integrated Qwen 2.5 for NLP explanations with a fallback system',
       'Developed the UI using Gradio with async interaction and clear UX flow',
       'Connected DSP, CV, XAI, and NLP into a single end-to-end pipeline',
       'Deployed the system on Hugging Face Spaces using ONNX Runtime',
     ],
-    quote: '"Every millisecond counts. Good backend is invisible until it fails."',
-    quoteBorder: 'rgba(167,139,250,0.28)',
   },
   {
     initial: 'R',
@@ -58,8 +52,6 @@ const members: Member[] = [
       'End-to-end testing, QA pipeline & coverage',
       'Docker deployment, CI setup & documentation',
     ],
-    quote: '"Making complex security feel effortless to whoever uses it."',
-    quoteBorder: 'rgba(52,211,153,0.28)',
   },
 ]
 
@@ -147,13 +139,6 @@ export default function Team() {
                 </li>
               ))}
             </ul>
-
-            <div
-              className="text-[13px] text-white/[0.28] italic leading-[1.6] pl-3 border-l-2"
-              style={{ borderLeftColor: m.quoteBorder }}
-            >
-              {m.quote}
-            </div>
           </div>
         ))}
       </div>
