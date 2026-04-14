@@ -12,7 +12,7 @@ export default function Hero() {
     <section id="hero" className="pt-[140px] pb-24 px-8 max-w-page mx-auto relative">
       <div className="flex items-center gap-2.5 mb-7 anim-fu" style={{ animationDelay: '100ms' }}>
         <span className="font-mono-c text-[11px] tracking-[0.12em] text-y bg-[rgba(185,154,46,0.07)] border border-[rgba(185,154,46,0.18)] px-3 py-1 rounded uppercase">
-          Final Project · Computer Science
+          Final Project · KCVanguard
         </span>
         <span className="font-mono-c text-[11px] text-mt2">· Ferel · Safa · Razan</span>
       </div>
